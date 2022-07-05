@@ -6,8 +6,8 @@ export default function SideBarItems({ item }) {
 
   if (item.childrens) {
     return (
-      <div className={open ? "sidebar-item toggle-btn open" : "sidebar-item toggle-btn"}  onClick={() => setOpen(!open)}>
-        <div className="sidebar-title">
+      <div className={open ? "sidebar-item open" : "sidebar-item"}>
+        <div className="sidebar-title toggle-btn" onClick={() => setOpen(!open)}>
           <span>
             {item.icon && <i className={item.icon}></i>}
             {item.title}
