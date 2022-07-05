@@ -61,7 +61,7 @@ body{
   justify-content: space-between;
   /* cursor: pointer; */
   color: var(--main-font-color);
-  font-size: 18px;
+  font-size: 15px;
 }
 .sidebar-title span i{
   display: inline-block;
@@ -85,7 +85,7 @@ body{
 
 .sidebar-item.plain{
   color: var(--main-font-color);
-  font-size: 15px;
+  font-size: 13px;
   text-decoration: none;
 }
 .sidebar-item.plain:hover{
@@ -99,7 +99,7 @@ body{
 .no-dropdown {
   display: flex;
   color: var(--main-font-color);
-  font-size: 18px;
+  font-size: 15px;
   text-decoration: none;
 }
 .no-dropdown i{
