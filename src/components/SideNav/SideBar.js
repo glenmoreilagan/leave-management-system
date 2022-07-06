@@ -1,5 +1,5 @@
 import SideBarItems from "./SideBarItems"
-import items from "../../SideNavData/SideNavData.json"
+import items from "./SideNavData.json"
 
 
 export default function SideBar() {

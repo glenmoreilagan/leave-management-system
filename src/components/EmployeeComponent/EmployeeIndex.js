@@ -50,19 +50,6 @@ function EmployeeIndex() {
             </tr>
           </thead>
           <tbody>
-            {/* <tr>
-              <td>TEST</td>
-              <td>TEST</td>
-              <td>TEST</td>
-              <td>TEST</td>
-              <td>
-                <Link to='/employee/2'>
-                  <i className="bi bi-pencil-square btn-action-icon" title='Edit'></i>
-                </Link>
-                &nbsp;
-                <i className="bi bi-x-square btn-action-icon" title='Delete'></i>
-              </td>
-            </tr> */}
             {
               employee.map((j, index) => {
                 // console.log(j);
