@@ -16,9 +16,14 @@ table thead tr th {
   /* width: 350px; */
 }
 
-table tbody tr td,
-.btn-action {
+table tbody tr td {
   /* font-weight: 500; */
   font-size: 12px;
-  /* width: 350px; */
+  /* width: 50px; */
+}
+
+table tbody tr td :is(.btn-action-icon, a) {
+  color: var(--main-font-color);
+  cursor: pointer;
+  font-size: 20px;
 }

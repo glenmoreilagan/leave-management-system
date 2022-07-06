@@ -13,6 +13,7 @@
 html,
 body {
   height: 100vh;
+  background-color: #F9F9F9;
 }
 
 body {
@@ -37,9 +38,11 @@ body {
   flex-direction: column;
   /* justify-content: center; */
   /* text-align: center; */
+  margin-left: 260px;
 }
 
 .sidebar {
+  position: fixed;
   width: 260px;
   flex-shrink: 0;
   background-color: #F9F9F9;
@@ -107,6 +110,16 @@ body {
   width: 1.7em;
 }
 
+@media (max-width: 558px) {
+  .sidebar {
+    display: none;
+  }
+  .container{
+    margin-left: 0;
+    width: 100% !important;
+  } 
+}
+
 .no-dropdown {
   display: flex;
   color: var(--main-font-color);
@@ -129,4 +142,22 @@ body {
   padding: 50px 10px 50px 10px;
   background: #E7E8E9;
   color: #495057;
+}
+
+nav.breadcrumb {
+  background-color: #fff;
+  color: var(--main-font-color);
+  font-size: 13px;
+  padding: 10px 10px 0 10px;
+}
+
+nav.breadcrumb li a {
+  text-decoration: none;
+  color: var(--main-font-color);
+  font-weight: 600;
+}
+
+.header-btn {
+  font-size: 12px;
+  width: 100px;
 }
