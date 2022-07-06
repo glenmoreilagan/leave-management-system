@@ -1,0 +1,24 @@
+table thead tr .sm {
+  width: 150px;
+}
+
+table thead tr .md {
+  width: 200px;
+}
+
+table thead tr .lg {
+  width: 300px;
+}
+
+table thead tr th {
+  font-weight: 500;
+  font-size: 13px;
+  /* width: 350px; */
+}
+
+table tbody tr td,
+.btn-action {
+  /* font-weight: 500; */
+  font-size: 12px;
+  /* width: 350px; */
+}

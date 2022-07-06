@@ -117,12 +117,12 @@
     "title": "Support",
     "icon": "bi-question-circle-fill",
     "path": "/support",
-    "class" : "no-dropdown"
+    "class": "no-dropdown"
   },
   {
     "title": "Report Bug",
     "icon": "bi-bug",
     "path": "/report-bug",
-    "class" : "no-dropdown"
+    "class": "no-dropdown"
   }
 ]

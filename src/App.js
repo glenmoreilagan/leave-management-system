@@ -10,7 +10,7 @@ function App() {
         <div className="container">
           <Switch>
             <Route exact path="/employee">
-              <EmployeeIndex/>
+              <EmployeeIndex />
             </Route>
           </Switch>
         </div>

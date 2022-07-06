@@ -1,30 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&family=Roboto:ital,wght@0,400;0,500;0,700;1,300&display=swap');
+
 :root {
   --main-font-color: #495057;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body{
+html,
+body {
   height: 100vh;
 }
-body{
+
+body {
   font-family: poppins, poppins, sans-serif;
   /* font-size: 16px; */
   color: var(--main-font-color);
 }
 
-.main{
+.main {
   display: flex;
   height: 100vh;
 }
 
 
-.container{
+.container {
   flex-grow: 1;
   padding: 2em;
   /* background-image: radial-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .8)), url('../public/banner.png'); */
@@ -32,11 +35,11 @@ body{
   background-position: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  text-align: center;
+  /* justify-content: center; */
+  /* text-align: center; */
 }
 
-.sidebar{
+.sidebar {
   width: 260px;
   flex-shrink: 0;
   background-color: #F9F9F9;
@@ -45,53 +48,61 @@ body{
 }
 
 
-.sidebar-item{
+.sidebar-item {
   padding: .75em 1em;
   display: block;
   transition: background-color .15s;
   border-radius: 5px;
   cursor: pointer;
 }
-.sidebar-item:hover{
+
+.sidebar-item:hover {
   background-color: rgb(73, 83, 87, .1);
 }
 
-.sidebar-title{
+.sidebar-title {
   display: flex;
   justify-content: space-between;
   /* cursor: pointer; */
   color: var(--main-font-color);
   font-size: 15px;
 }
-.sidebar-title span i{
+
+.sidebar-title span i {
   display: inline-block;
   width: 1.5em;
 }
-.sidebar-title .toggle-btn{
+
+.sidebar-title .toggle-btn {
   cursor: pointer;
   transition: transform .3s;
 }
-.sidebar-item.open > .sidebar-title .toggle-btn{
+
+.sidebar-item.open>.sidebar-title .toggle-btn {
   transform: rotate(180deg);
 }
-.sidebar-content{
+
+.sidebar-content {
   padding-top: .25em;
   height: 0;
   overflow: hidden;
 }
-.sidebar-item.open > .sidebar-content{
+
+.sidebar-item.open>.sidebar-content {
   height: auto;
 }
 
-.sidebar-item.plain{
+.sidebar-item.plain {
   color: var(--main-font-color);
   font-size: 13px;
   text-decoration: none;
 }
-.sidebar-item.plain:hover{
+
+.sidebar-item.plain:hover {
   /* text-decoration: underline; */
 }
-.sidebar-item.plain i{
+
+.sidebar-item.plain i {
   display: inline-block;
   width: 1.7em;
 }
@@ -102,16 +113,20 @@ body{
   font-size: 15px;
   text-decoration: none;
 }
-.no-dropdown i{
+
+.no-dropdown i {
   display: inline-block;
   width: 1.5em;
 }
 
 
-.system-logo-title {
+.system-logo-title h4 {
   text-align: center;
+  font-weight: 800;
+}
+
+.system-logo-title {
   padding: 50px 10px 50px 10px;
   background: #E7E8E9;
   color: #495057;
-  font-weight: 700;
 }
