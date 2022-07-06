@@ -1,30 +1,38 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import '../../css/TableStyle.css'
+import axios from 'axios'
+
+
+import EmployeeList from './EmployeeList'
 
 function EmployeeIndex() {
 
   const [employee, setEmployee] = useState([])
+  const [isLoading, setIsloading] = useState(true)
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-    .then(response => response.json())
-    .then(json => {
-      // console.log(json)
+    axios.get(`https://jsonplaceholder.typicode.com/users`)
+    .then(res => {
+      console.log(res)
       let list = []
-      json.map(j => {
-        // console.log(j)
-        list.push({
-          id : j.id,
-          username : j.username,
-          name : j.name,
-          address : j.address.street,
-          phone : j.phone
+      if(res.status == 200) {
+        res.data.map(j => {
+          list.push({
+            id : j.id,
+            username : j.username,
+            name : j.name,
+            address : j.address.street,
+            phone : j.phone
+          })
         })
-      })
+      }
 
       setEmployee(list)
-
+      setIsloading(false)
+    })
+    .catch(err => {
+      console.log(err)
     })
 
     // return console.log('Clean-Up')
@@ -37,7 +45,7 @@ function EmployeeIndex() {
       </div>
       <div className='table-responsive'>
         <div className='header-btn-div mb-3'>
-          <Link to='/employee/new'><button className='btn btn-primary btn-sm header-btn'>NEW</button></Link>
+          <Link to='/employee/create'><button className='btn btn-primary btn-sm header-btn'>NEW</button></Link>
         </div>
         <table className='table table-striped'>
           <thead>
@@ -51,24 +59,8 @@ function EmployeeIndex() {
           </thead>
           <tbody>
             {
-              employee.map((j, index) => {
-                // console.log(j);
-                return (
-                  <tr key={j.id}>
-                    <td>{j.username}</td>
-                    <td>{j.name}</td>
-                    <td>{j.address.street}</td>
-                    <td>{j.phone}</td>
-                    <td>
-                      <Link to={'/employee/'+j.id}>
-                        <i className="bi bi-pencil-square btn-action-icon" title='Edit'></i>
-                      </Link>
-                      &nbsp;
-                      <i className="bi bi-x-square btn-action-icon" title='Delete'></i>
-                    </td>
-                  </tr>
-                )
-              })
+              isLoading ? <tr style={{textAlign:'center'}}><td colSpan={5}>loading...</td></tr>
+              : employee.map((emp, index) => { return (<EmployeeList key={emp.id} emp={emp} />) })
             }
           </tbody>
         </table>

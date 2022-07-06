@@ -4,6 +4,28 @@
 :root {
   --main-font-color: #495057;
 }
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #CCCCCC; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
 
 * {
   margin: 0;
@@ -102,9 +124,9 @@ body {
   text-decoration: none;
 }
 
-.sidebar-item.plain:hover {
+/* .sidebar-item.plain:hover { */
   /* text-decoration: underline; */
-}
+/* } */
 
 .sidebar-item.plain i {
   display: inline-block;

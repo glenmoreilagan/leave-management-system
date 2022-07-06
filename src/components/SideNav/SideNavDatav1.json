@@ -17,6 +17,28 @@
         "title": "Leave Type",
         "icon": "bi bi-dash-lg",
         "path": "/leavetype"
+      },
+      {
+        "title": "Contact",
+        "icon": "bi-phone-fill",
+        "childrens": [
+          {
+            "title": "Facebook",
+            "icon": "bi-facebook"
+          },
+          {
+            "title": "Twitter",
+            "icon": "bi-twitter"
+          },
+          {
+            "title": "Instagram",
+            "icon": "bi-instagram"
+          }
+        ]
+      },
+      {
+        "title": "FAQ",
+        "icon": "bi-question-circle-fill"
       }
     ]
   },

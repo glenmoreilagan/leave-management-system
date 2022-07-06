@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import axios from 'axios'
 
 function AddEditEmployee() {
   const { id } = useParams()
@@ -15,18 +16,36 @@ function AddEditEmployee() {
 
   }
 
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users/'+id)
-    .then(response => response.json())
-    .then(json => {
-      // console.log(json)
-      setEmployee({
-        // console.log(j)
-        username : json.username,
-        empname : json.name,
-        address : json.address.street,
-        phone : json.phone
+  const saveEmployee = () => {
+    if(id == 'create') {
+      axios.post('http://localhost:3001/employee/create', employee)
+      .then(res => {
+        console.log(res)
       })
+      .catch(res => {
+        console.log(res)
+      })
+    } else {
+
+    }
+  }
+
+  useEffect(() => {
+    axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
+    .then(res => {
+      console.log(res)
+      if(res.status == 200) {
+        setEmployee({
+          // console.log(j)
+          username : res.data.username,
+          empname : res.data.name,
+          address : res.data.address.street,
+          phone : res.data.phone
+        })
+      }
+    })
+    .catch(err => {
+      console.log(err)
     })
 
     // return console.log('Clean-Up')
@@ -37,12 +56,15 @@ function AddEditEmployee() {
       <nav className='breadcrumb' aria-label='breadcrumb'>
         <ol className='breadcrumb'>
           <li className='breadcrumb-item'><Link to='/employee'>Employee</Link></li>
-          <li className='breadcrumb-item active' aria-current='page'>{id != 'new' ? 'Edit' : 'Add'} Employee</li>
+          <li className='breadcrumb-item active' aria-current='page'>{id != 'create' ? 'Edit' : 'Create'} Employee</li>
         </ol>
       </nav>
       {/* <div className='-header-title'><h5>EMPLOYEE</h5></div> */}
       <div className='card'>
       <div className='card-body'>
+      <div className='header-btn-div mb-3'>
+        <button className='btn btn-primary btn-sm header-btn' onClick={saveEmployee}>SAVE</button>
+      </div>
       <div className='row'>
         <div className='col'>
           <label htmlFor="empname">Employee Name</label>
