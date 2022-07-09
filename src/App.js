@@ -13,7 +13,10 @@ function App() {
             <Route exact path="/employee">
               <EmployeeIndex />
             </Route>
-            <Route exact path="/employee/:id">
+            <Route exact path="/employee/:id"> {/** NEW/ADD **/}
+              <AddEditEmployee />
+            </Route>
+            <Route exact path="/employee/:id/edit"> {/** EDIT/UPDATE **/}
               <AddEditEmployee />
             </Route>
           </Switch>

@@ -12,7 +12,7 @@ function EmployeeIndex() {
   const [isLoading, setIsloading] = useState(true)
 
   useEffect(() => {
-    axios.get(`https://jsonplaceholder.typicode.com/users`)
+    axios.get(`http://localhost:3001/employee`)
     .then(res => {
       console.log(res)
       let list = []
@@ -20,9 +20,8 @@ function EmployeeIndex() {
         res.data.map(j => {
           list.push({
             id : j.id,
-            username : j.username,
-            name : j.name,
-            address : j.address.street,
+            empname : j.empname,
+            address : j.address,
             phone : j.phone
           })
         })
@@ -43,10 +42,10 @@ function EmployeeIndex() {
       <div className='mb-3'>
         <h5>EMPLOYEE LIST</h5>
       </div>
+      <div className='header-btn-div mb-3'>
+        <Link to='/employee/create'><button className='btn btn-primary btn-sm header-btn'>NEW</button></Link>
+      </div>
       <div className='table-responsive'>
-        <div className='header-btn-div mb-3'>
-          <Link to='/employee/create'><button className='btn btn-primary btn-sm header-btn'>NEW</button></Link>
-        </div>
         <table className='table table-striped'>
           <thead>
             <tr>
@@ -60,7 +59,7 @@ function EmployeeIndex() {
           <tbody>
             {
               isLoading ? <tr style={{textAlign:'center'}}><td colSpan={5}>loading...</td></tr>
-              : employee.map((emp, index) => { return (<EmployeeList key={emp.id} emp={emp} />) })
+              : employee.map((emp, index) => { return (<EmployeeList key={emp.id} emp={emp} employee={employee} setEmployee={setEmployee} />) })
             }
           </tbody>
         </table>
