@@ -6,17 +6,17 @@
       {
         "title": "Employee",
         "icon": "bi bi-dash-lg",
-        "path": "/employee"
+        "path": "/employees"
       },
       {
         "title": "Department",
         "icon": "bi bi-dash-lg",
-        "path": "/department"
+        "path": "/departments"
       },
       {
         "title": "Leave Type",
         "icon": "bi bi-dash-lg",
-        "path": "/leavetype"
+        "path": "/leavetypes"
       }
     ]
   },

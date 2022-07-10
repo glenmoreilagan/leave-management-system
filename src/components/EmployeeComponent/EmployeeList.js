@@ -3,31 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 const EmployeeList = props => {
-  const { emp, employee, setEmployee } = props
-
-  const deleteEmployee = (id) => {
-    axios.delete(`http://localhost:3001/employee/${id}`)
-    .then((res) => {
-      console.log(res)
-      if(res.status == 200) {
-        let list = []
-        employee.map((val, index) => {
-          if(id != val.id) {
-            list.push({
-              id : val.id,
-              empname : val.empname,
-              address : val.address,
-              phone : val.phone
-            })
-          }
-        })
-        setEmployee(list)
-      }
-    })
-    .catch((res) => {
-      console.log(res)
-    })
-  }
+  const { emp, deleteEmployee } = props
 
   return (
     <React.Fragment>
@@ -37,7 +13,7 @@ const EmployeeList = props => {
         <td>{emp.address}</td>
         <td>{emp.phone}</td>
         <td className='text-center'>
-          <Link to={`/employee/${emp.id}`}>
+          <Link to={`/employees/${emp.id}`}>
             <i className="bi bi-pencil-square btn-action-icon" title='Edit'></i>
           </Link>
           &nbsp;

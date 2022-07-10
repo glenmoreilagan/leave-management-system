@@ -3,29 +3,29 @@ import { Link } from 'react-router-dom'
 import '../../css/TableStyle.css'
 import axios from 'axios'
 
-import DepartmentList from './DepartmentList'
 
-const DepartmentIndex = () => {
-  const [department, setDepartment] = useState([])
+import LeavetypeList from './LeavetypeList'
+
+const LeavetypeIndex = () => {
+  const [leavetype, setleavetype] = useState([])
   const [isLoading, setIsloading] = useState(true)
 
-  const deleteDepartment = (id) => {
-    axios.delete(`http://localhost:3001/departments/${id}`)
+  const deleteLeavetype = (id) => {
+    axios.delete(`http://localhost:3001/leavetypes/${id}`)
     .then((res) => {
       console.log(res)
       if(res.status == 200) {
         let list = []
-        department.map((val, index) => {
+        leavetype.map((val, index) => {
           if(id != val.id) {
             list.push({
               id : val.id,
-              deptprefix : val.deptprefix,
-              deptcode : val.deptcode,
-              deptname : val.deptname
+              leavetype : val.leavetype,
+              leavedescription : val.leavedescription,
             })
           }
         })
-        setDepartment(list)
+        setleavetype(list)
       }
     })
     .catch((res) => {
@@ -34,7 +34,7 @@ const DepartmentIndex = () => {
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/departments`)
+    axios.get(`http://localhost:3001/leavetypes`)
     .then(res => {
       console.log(res)
       let list = []
@@ -42,50 +42,48 @@ const DepartmentIndex = () => {
         res.data.map(j => {
           list.push({
             id : j.id,
-            deptprefix : j.deptprefix,
-            deptcode : j.deptcode,
-            deptname : j.deptname
+            leavetype : j.leavetype,
+            leavedescription : j.leavedescription,
           })
         })
       }
-
-      setDepartment(list)
+  
+      setleavetype(list)
       setIsloading(false)
     })
     .catch(err => {
       console.log(err)
     })
-
+  
     // return console.log('Clean-Up')
   }, [])
 
   return (
     <React.Fragment>
       <div className='mb-3'>
-        <h5>DEPARTMENT LIST</h5>
+        <h5>LEAVETYPE LIST</h5>
       </div>
       <div className='header-btn-div mb-3'>
-        <Link to='/departments/create'><button className='btn btn-primary btn-sm header-btn'>NEW</button></Link>
+        <Link to='/leavetypes/create'><button className='btn btn-primary btn-sm header-btn'>NEW</button></Link>
       </div>
       <div className='table-responsive'>
         <table className='table table-striped'>
           <thead>
             <tr>
-              <th className='sm'>DEPARTMENT PREFIX</th>
-              <th className='md'>DEPARTMENT CODE</th>
-              <th className='lg'>DEPARTMENT NAME</th>
+              <th className='sm'>LEAVE TYPE</th>
+              <th className='md'>LEAVE DESCRIPTION</th>
               <th className='text-center sm'>ACTION</th>
             </tr>
           </thead>
           <tbody>
             {
               isLoading ? <tr style={{textAlign:'center'}}><td colSpan={5}>loading...</td></tr>
-              : department.map((dept, index) => { 
+              : leavetype.map((ltype, index) => { 
                 return (
-                  <DepartmentList 
-                    key = {dept.id} 
-                    dept = {dept} 
-                    deleteDepartment = {deleteDepartment}
+                  <LeavetypeList 
+                    key = {ltype.id} 
+                    ltype = {ltype}
+                    deleteLeavetype = {deleteLeavetype}
                   />
                 ) 
               })
@@ -97,4 +95,4 @@ const DepartmentIndex = () => {
   )
 }
 
-export default DepartmentIndex
+export default LeavetypeIndex

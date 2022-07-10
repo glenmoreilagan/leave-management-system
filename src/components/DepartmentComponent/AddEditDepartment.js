@@ -19,7 +19,7 @@ const AddEditDepartment = () => {
 
   const saveDepartment = () => {
     if (id === "create") {
-      axios.post("http://localhost:3001/department/create", department)
+      axios.post("http://localhost:3001/departments/create", department)
       .then((res) => {
         console.log(res)
       })
@@ -46,7 +46,7 @@ const AddEditDepartment = () => {
 
   useEffect(() => {
     if (id != "create") {
-      axios.get(`http://localhost:3001/department/${id}`)
+      axios.get(`http://localhost:3001/departments/${id}`)
       .then((res) => {
         console.log(res)
         if (res.status == 200) {
@@ -67,7 +67,7 @@ const AddEditDepartment = () => {
 
   return (
     <React.Fragment>
-      <Breadcrumb linkTo="department" label="Department" />
+      <Breadcrumb linkTo="departments" label="Department" />
       {/* <nav className="breadcrumb" aria-label="breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item">

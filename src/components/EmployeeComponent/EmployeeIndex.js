@@ -7,12 +7,35 @@ import axios from 'axios'
 import EmployeeList from './EmployeeList'
 
 const EmployeeIndex = () => {
-
   const [employee, setEmployee] = useState([])
   const [isLoading, setIsloading] = useState(true)
 
+  const deleteEmployee = (id) => {
+    axios.delete(`http://localhost:3001/employees/${id}`)
+    .then((res) => {
+      console.log(res)
+      if(res.status == 200) {
+        let list = []
+        employee.map((val, index) => {
+          if(id != val.id) {
+            list.push({
+              id : val.id,
+              empname : val.empname,
+              address : val.address,
+              phone : val.phone
+            })
+          }
+        })
+        setEmployee(list)
+      }
+    })
+    .catch((res) => {
+      console.log(res)
+    })
+  }
+
   useEffect(() => {
-    axios.get(`http://localhost:3001/employee`)
+    axios.get(`http://localhost:3001/employees`)
     .then(res => {
       console.log(res)
       let list = []
@@ -43,7 +66,7 @@ const EmployeeIndex = () => {
         <h5>EMPLOYEE LIST</h5>
       </div>
       <div className='header-btn-div mb-3'>
-        <Link to='/employee/create'><button className='btn btn-primary btn-sm header-btn'>NEW</button></Link>
+        <Link to='/employees/create'><button className='btn btn-primary btn-sm header-btn'>NEW</button></Link>
       </div>
       <div className='table-responsive'>
         <table className='table table-striped'>
@@ -59,7 +82,15 @@ const EmployeeIndex = () => {
           <tbody>
             {
               isLoading ? <tr style={{textAlign:'center'}}><td colSpan={5}>loading...</td></tr>
-              : employee.map((emp, index) => { return (<EmployeeList key={emp.id} emp={emp} employee={employee} setEmployee={setEmployee} />) })
+              : employee.map((emp, index) => { 
+                return (
+                  <EmployeeList 
+                    key = {emp.id} 
+                    emp = {emp}
+                    deleteEmployee = {deleteEmployee}
+                  />
+                ) 
+              })
             }
           </tbody>
         </table>

@@ -19,7 +19,7 @@ const AddEditEmployee = () => {
 
   const saveEmployee = () => {
     if (id === "create") {
-      axios.post("http://localhost:3001/employee/create", employee)
+      axios.post("http://localhost:3001/employees/create", employee)
       .then((res) => {
         console.log(res)
       })
@@ -27,7 +27,7 @@ const AddEditEmployee = () => {
         console.log(res)
       })
     } else {
-      axios.put(`http://localhost:3001/employee/${id}`, employee)
+      axios.put(`http://localhost:3001/employees/${id}`, employee)
       .then((res) => {
         console.log(res)
         // if (res.status == 200) {
@@ -46,7 +46,7 @@ const AddEditEmployee = () => {
 
   useEffect(() => {
     if (id != "create") {
-      axios.get(`http://localhost:3001/employee/${id}`)
+      axios.get(`http://localhost:3001/employees/${id}`)
       .then((res) => {
         console.log(res)
         if (res.status == 200) {
@@ -67,7 +67,7 @@ const AddEditEmployee = () => {
 
   return (
     <React.Fragment>
-      <Breadcrumb linkTo="employee" label="Employee" />
+      <Breadcrumb linkTo="employees" label="Employee" />
       {/* <nav className="breadcrumb" aria-label="breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item">
