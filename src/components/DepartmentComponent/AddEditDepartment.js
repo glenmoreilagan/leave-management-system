@@ -4,22 +4,22 @@ import axios from "axios"
 
 import Breadcrumb from '../BreadcrumbComponent/Breadcrumb'
 
-const AddEditEmployee = () => {
+const AddEditDepartment = () => {
   const { id } = useParams()
-  const [employee, setEmployee] = useState([])
+  const [department, setDepartment] = useState([])
 
   const inputOnChange = (e) => {
     const { name, value } = e.target
 
-    setEmployee({
-      ...employee,
+    setDepartment({
+      ...department,
       [name]: value,
     })
   }
 
-  const saveEmployee = () => {
+  const saveDepartment = () => {
     if (id === "create") {
-      axios.post("http://localhost:3001/employee/create", employee)
+      axios.post("http://localhost:3001/department/create", department)
       .then((res) => {
         console.log(res)
       })
@@ -27,11 +27,11 @@ const AddEditEmployee = () => {
         console.log(res)
       })
     } else {
-      axios.put(`http://localhost:3001/employee/${id}`, employee)
+      axios.put(`http://localhost:3001/department/${id}`, department)
       .then((res) => {
         console.log(res)
         // if (res.status == 200) {
-        //   setEmployee({
+        //   setDepartment({
         //     empname: res.data[0].empname,
         //     address: res.data[0].address,
         //     phone: res.data[0].phone,
@@ -46,14 +46,14 @@ const AddEditEmployee = () => {
 
   useEffect(() => {
     if (id != "create") {
-      axios.get(`http://localhost:3001/employee/${id}`)
+      axios.get(`http://localhost:3001/department/${id}`)
       .then((res) => {
         console.log(res)
         if (res.status == 200) {
-          setEmployee({
-            empname: res.data[0].empname,
-            address: res.data[0].address,
-            phone: res.data[0].phone,
+          setDepartment({
+            deptprefix: res.data[0].deptprefix,
+            deptcode: res.data[0].deptcode,
+            deptname: res.data[0].deptname,
           })
         }
       })
@@ -67,58 +67,58 @@ const AddEditEmployee = () => {
 
   return (
     <React.Fragment>
-      <Breadcrumb linkTo="employee" label="Employee" />
+      <Breadcrumb linkTo="department" label="Department" />
       {/* <nav className="breadcrumb" aria-label="breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item">
-            <Link to="/employee">Employee</Link>
+            <Link to="/department">Department</Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-            {id != "create" ? "Edit" : "Create"} Employee
+            {id != "create" ? "Edit" : "Create"} Department
           </li>
         </ol>
       </nav> */}
-      {/* <div className='-header-title'><h5>EMPLOYEE</h5></div> */}
+      {/* <div className='-header-title'><h5>DEPARTMENT</h5></div> */}
       <div className="card">
         <div className="card-body">
           <div className="header-btn-div mb-3">
             <button
               className="btn btn-primary btn-sm header-btn"
-              onClick={saveEmployee}
+              onClick={saveDepartment}
             >
               SAVE
             </button>
           </div>
           <div className="row">
             <div className="col">
-              <label htmlFor="empname">Employee Name</label>
+              <label htmlFor="deptprefix">Department Prefix</label>
               <input
                 onChange={(e) => inputOnChange(e)}
                 type="text"
                 className="form-control form-control-sm"
-                id="empname"
-                name="empname"
-                value={employee.empname || ""}
+                id="deptprefix"
+                name="deptprefix"
+                value={department.deptprefix || ""}
               />
-              <label htmlFor="address">Address</label>
+              <label htmlFor="deptcode">Department Code</label>
               <input
                 onChange={(e) => inputOnChange(e)}
                 type="text"
                 className="form-control form-control-sm"
-                id="address"
-                name="address"
-                value={employee.address || ""}
+                id="deptcode"
+                name="deptcode"
+                value={department.deptcode || ""}
               />
             </div>
             <div className="col">
-              <label htmlFor="phone">Contact No.</label>
+              <label htmlFor="deptname">Department Name</label>
               <input
                 onChange={(e) => inputOnChange(e)}
                 type="text"
                 className="form-control form-control-sm"
-                id="phone"
-                name="phone"
-                value={employee.phone || ""}
+                id="deptname"
+                name="deptname"
+                value={department.deptname || ""}
               />
             </div>
           </div>
@@ -128,4 +128,4 @@ const AddEditEmployee = () => {
   )
 }
 
-export default AddEditEmployee
+export default AddEditDepartment

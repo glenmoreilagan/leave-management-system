@@ -21,6 +21,12 @@
     ]
   },
   {
+    "title": "Apply Leave",
+    "icon": "bi bi-three-dots-vertical",
+    "path": "/applyleave",
+    "class": "no-dropdown"
+  },
+  {
     "title": "Account",
     "icon": "bi-info-circle-fill",
     "childrens": [

@@ -36,8 +36,8 @@ const EmployeeList = props => {
         <td>{emp.empname}</td>
         <td>{emp.address}</td>
         <td>{emp.phone}</td>
-        <td>
-          <Link to={`/employee/${emp.id}/edit`}>
+        <td className='text-center'>
+          <Link to={`/employee/${emp.id}`}>
             <i className="bi bi-pencil-square btn-action-icon" title='Edit'></i>
           </Link>
           &nbsp;
