@@ -4,22 +4,22 @@ import axios from "axios"
 
 import Breadcrumb from '../BreadcrumbComponent/Breadcrumb'
 
-const AddEditEmployee = () => {
+const AddEditLeavetype = () => {
   const { id } = useParams()
-  const [employee, setEmployee] = useState([])
+  const [leavetype, setLeavetype] = useState([])
 
   const inputOnChange = (e) => {
     const { name, value } = e.target
 
-    setEmployee({
-      ...employee,
+    setLeavetype({
+      ...leavetype,
       [name]: value,
     })
   }
 
-  const saveEmployee = () => {
+  const saveLeavetype = () => {
     if (id === "create") {
-      axios.post("http://localhost:3001/employees/create", employee)
+      axios.post("http://localhost:3001/leavetypes/create", leavetype)
       .then((res) => {
         console.log(res)
       })
@@ -27,11 +27,11 @@ const AddEditEmployee = () => {
         console.log(res)
       })
     } else {
-      axios.put(`http://localhost:3001/employees/${id}`, employee)
+      axios.put(`http://localhost:3001/leavetypes/${id}`, leavetype)
       .then((res) => {
         console.log(res)
         // if (res.status == 200) {
-        //   setEmployee({
+        //   setLeavetype({
         //     empname: res.data[0].empname,
         //     address: res.data[0].address,
         //     phone: res.data[0].phone,
@@ -46,14 +46,13 @@ const AddEditEmployee = () => {
 
   useEffect(() => {
     if (id != "create") {
-      axios.get(`http://localhost:3001/employees/${id}`)
+      axios.get(`http://localhost:3001/leavetypes/${id}`)
       .then((res) => {
         console.log(res)
         if (res.status == 200) {
-          setEmployee({
-            empname: res.data[0].empname,
-            address: res.data[0].address,
-            phone: res.data[0].phone,
+          setLeavetype({
+            leavetype: res.data[0].leavetype,
+            leavedescription: res.data[0].leavedescription,
           })
         }
       })
@@ -67,50 +66,38 @@ const AddEditEmployee = () => {
 
   return (
     <React.Fragment>
-      <Breadcrumb linkTo="employees" label="Employee" />
-      {/* <div className='-header-title'><h5>EMPLOYEE</h5></div> */}
+      <Breadcrumb linkTo="leavetypes" label="Leave Type" />
+      {/* <div className='-header-title'><h5>DEPARTMENT</h5></div> */}
       <div className="card">
         <div className="card-body">
           <div className="header-btn-div mb-3">
             <button
               className="btn btn-primary btn-sm header-btn"
-              onClick={saveEmployee}
+              onClick={saveLeavetype}
             >
               SAVE
             </button>
           </div>
           <div className="row">
             <div className="col">
-              <label htmlFor="empname">Employee Name</label>
+              <label htmlFor="leavetype">Leave Type</label>
               <input
                 onChange={(e) => inputOnChange(e)}
                 type="text"
                 className="form-control form-control-sm"
-                id="empname"
-                name="empname"
-                value={employee.empname || ""}
+                id="leavetype"
+                name="leavetype"
+                value={leavetype.leavetype || ""}
               />
-              <label htmlFor="address">Address</label>
+              <label htmlFor="leavedescription">Leave Description</label>
               <textarea
                 onChange={(e) => inputOnChange(e)}
                 type="text"
                 className="form-control form-control-sm"
-                id="address"
-                name="address"
-                value={employee.address || ""}
+                id="leavedescription"
+                name="leavedescription"
+                value={leavetype.leavedescription || ""}
               />
-              <label htmlFor="phone">Contact No.</label>
-              <input
-                onChange={(e) => inputOnChange(e)}
-                type="text"
-                className="form-control form-control-sm"
-                id="phone"
-                name="phone"
-                value={employee.phone || ""}
-              />
-            </div>
-            <div className="col">
-              {/*  */}
             </div>
           </div>
         </div>
@@ -119,4 +106,4 @@ const AddEditEmployee = () => {
   )
 }
 
-export default AddEditEmployee
+export default AddEditLeavetype

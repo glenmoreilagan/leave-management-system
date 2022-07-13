@@ -11,13 +11,13 @@ table thead tr .lg {
 }
 
 table thead tr th {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 13px;
   /* width: 350px; */
 }
 
 table tbody tr td {
-  /* font-weight: 500; */
+  /* font-weight: 400; */
   font-size: 12px;
   /* width: 50px; */
 }
@@ -26,4 +26,8 @@ table tbody tr td :is(.btn-action-icon, a) {
   color: var(--main-font-color);
   cursor: pointer;
   font-size: 20px;
+}
+
+table tbody tr td :is(.font-bold) {
+  font-weight: 500;
 }

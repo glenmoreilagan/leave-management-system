@@ -7,7 +7,7 @@ import axios from 'axios'
 import LeavetypeList from './LeavetypeList'
 
 const LeavetypeIndex = () => {
-  const [leavetype, setleavetype] = useState([])
+  const [leavetype, setLeavetype] = useState([])
   const [isLoading, setIsloading] = useState(true)
 
   const deleteLeavetype = (id) => {
@@ -25,7 +25,7 @@ const LeavetypeIndex = () => {
             })
           }
         })
-        setleavetype(list)
+        setLeavetype(list)
       }
     })
     .catch((res) => {
@@ -48,7 +48,7 @@ const LeavetypeIndex = () => {
         })
       }
   
-      setleavetype(list)
+      setLeavetype(list)
       setIsloading(false)
     })
     .catch(err => {
@@ -61,7 +61,7 @@ const LeavetypeIndex = () => {
   return (
     <React.Fragment>
       <div className='mb-3'>
-        <h5>LEAVETYPE LIST</h5>
+        <h5>LEAVE TYPE LIST</h5>
       </div>
       <div className='header-btn-div mb-3'>
         <Link to='/leavetypes/create'><button className='btn btn-primary btn-sm header-btn'>NEW</button></Link>

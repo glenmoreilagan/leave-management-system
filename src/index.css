@@ -155,6 +155,10 @@ body {
   width: 1.5em;
 }
 
+.no-dropdown:hover {
+  color: var(--main-font-color);
+}
+
 
 .system-logo-title h4 {
   text-align: center;

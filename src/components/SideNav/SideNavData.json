@@ -23,95 +23,13 @@
   {
     "title": "Apply Leave",
     "icon": "bi bi-three-dots-vertical",
-    "path": "/applyleave",
+    "path": "/applyleaves",
     "class": "no-dropdown"
   },
   {
-    "title": "Account",
-    "icon": "bi-info-circle-fill",
-    "childrens": [
-      {
-        "title": "Login",
-        "path": "/login"
-      },
-      {
-        "title": "Register",
-        "path": "/register"
-      },
-      {
-        "title": "Forgot Password",
-        "path": "/forgot-password"
-      },
-      {
-        "title": "Reset Password",
-        "path": "/reset-password"
-      }
-    ]
-  },
-  {
-    "title": "Profile",
-    "icon": "bi-person-fill",
-    "childrens": [
-      {
-        "title": "Profile",
-        "path": "/profile"
-      },
-      {
-        "title": "Settings",
-        "childrens": [
-          {
-            "title": "Account",
-            "path": "/settings/account"
-          },
-          {
-            "title": "Billing",
-            "childrens": [
-              {
-                "title": "Payment",
-                "path": "/settings/billing/payment"
-              },
-              {
-                "title": "Subscription",
-                "path": "/settings/billing/subscription"
-              }
-            ]
-          },
-          {
-            "title": "Notifications",
-            "path": "/settings/notifications"
-          }
-        ]
-      },
-      {
-        "title": "Logout",
-        "path": "/logout"
-      }
-    ]
-  },
-  {
-    "title": "Advance",
-    "icon": "bi-view-list",
-    "childrens": [
-      {
-        "title": "Search",
-        "path": "/search"
-      },
-      {
-        "title": "History",
-        "path": "/history"
-      }
-    ]
-  },
-  {
-    "title": "Support",
-    "icon": "bi-question-circle-fill",
-    "path": "/support",
-    "class": "no-dropdown"
-  },
-  {
-    "title": "Report Bug",
-    "icon": "bi-bug",
-    "path": "/report-bug",
+    "title": "Manage Admin",
+    "icon": "bi bi-three-dots-vertical",
+    "path": "/manageadmins",
     "class": "no-dropdown"
   }
 ]

@@ -13,6 +13,12 @@ import AddEditDepartment from './components/DepartmentComponent/AddEditDepartmen
 
 // LEAVETYPE
 import LeavetypeIndex from './components/LeavetypeComponent/LeavetypeIndex';
+import AddEditLeavetype from './components/LeavetypeComponent/AddEditLeavetype';
+
+// APPLY LEAVE
+import ApplyLeaveIndex from './components/ApplyleaveComponent/ApplyLeaveIndex';
+import AddEditApplyLeave from './components/ApplyleaveComponent/AddEditApplyLeave';
+
 
 function App() {
   return (
@@ -22,6 +28,9 @@ function App() {
         <div className="container">
           <Switch>
             {/* EMPLOYEE */}
+              <Route exact path="/">
+                <EmployeeIndex />
+              </Route>
               <Route exact path="/employees">
                 <EmployeeIndex />
               </Route>
@@ -44,9 +53,19 @@ function App() {
                 <LeavetypeIndex />
               </Route>
               <Route exact path="/leavetypes/:id"> {/** NEW/EDIT **/}
-                {/* <AddEditDepartment /> */}
+                <AddEditLeavetype />
               </Route>
             {/* LEAVETYPE */}
+            
+            {/* APPLY LEAVE */}
+              <Route exact path="/applyleaves">
+                <ApplyLeaveIndex />
+                {/* <AddEditApplyLeave /> */}
+              </Route>
+              <Route exact path="/applyleaves/:id"> {/** NEW/EDIT **/}
+                <AddEditApplyLeave />
+              </Route>
+            {/* APPLY LEAVE */}
 
           </Switch>
         </div>

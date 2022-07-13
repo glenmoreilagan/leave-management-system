@@ -68,16 +68,6 @@ const AddEditDepartment = () => {
   return (
     <React.Fragment>
       <Breadcrumb linkTo="departments" label="Department" />
-      {/* <nav className="breadcrumb" aria-label="breadcrumb">
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">
-            <Link to="/department">Department</Link>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            {id != "create" ? "Edit" : "Create"} Department
-          </li>
-        </ol>
-      </nav> */}
       {/* <div className='-header-title'><h5>DEPARTMENT</h5></div> */}
       <div className="card">
         <div className="card-body">
@@ -109,8 +99,6 @@ const AddEditDepartment = () => {
                 name="deptcode"
                 value={department.deptcode || ""}
               />
-            </div>
-            <div className="col">
               <label htmlFor="deptname">Department Name</label>
               <input
                 onChange={(e) => inputOnChange(e)}
@@ -120,6 +108,9 @@ const AddEditDepartment = () => {
                 name="deptname"
                 value={department.deptname || ""}
               />
+            </div>
+            <div className="col">
+              {/*  */}
             </div>
           </div>
         </div>

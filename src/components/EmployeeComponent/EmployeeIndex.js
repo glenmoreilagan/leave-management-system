@@ -43,6 +43,7 @@ const EmployeeIndex = () => {
         res.data.map(j => {
           list.push({
             id : j.id,
+            empcode : j.empcode,
             empname : j.empname,
             address : j.address,
             phone : j.phone
