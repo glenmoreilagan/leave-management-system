@@ -8,6 +8,9 @@ const AddEditEmployee = () => {
   const { id } = useParams()
   const [employee, setEmployee] = useState([])
 
+  const [file, setFile] = useState();
+  const [fileName, setFileName] = useState("");
+
   const inputOnChange = (e) => {
     const { name, value } = e.target
 
@@ -18,8 +21,21 @@ const AddEditEmployee = () => {
   }
 
   const saveEmployee = () => {
+    const formData = new FormData()
+    formData.append("file", file)
+    formData.append("fileName", fileName)
+    formData.append("empname", employee.empname)
+    formData.append("address", employee.address)
+    formData.append("phone", employee.phone)
+
+    let config = {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    }
+
     if (id === "create") {
-      axios.post("http://localhost:3001/employees/create", employee)
+      axios.post("http://localhost:3001/employees/store", formData, config)
       .then((res) => {
         console.log(res)
       })
@@ -44,6 +60,11 @@ const AddEditEmployee = () => {
     }
   }
 
+  const selectPic = (e) => {
+    setFile(e.target.files[0]);
+    setFileName(e.target.files[0].name);
+  }
+
   useEffect(() => {
     if (id != "create") {
       axios.get(`http://localhost:3001/employees/${id}`)
@@ -54,6 +75,7 @@ const AddEditEmployee = () => {
             empname: res.data[0].empname,
             address: res.data[0].address,
             phone: res.data[0].phone,
+            image: res.data[0].image,
           })
         }
       })
@@ -107,6 +129,15 @@ const AddEditEmployee = () => {
                 id="phone"
                 name="phone"
                 value={employee.phone || ""}
+              />
+              
+              <label htmlFor="file">Picture</label>
+              <input
+                onChange={(e) => selectPic(e)}
+                type="file"
+                className="form-control form-control-sm"
+                id="file"
+                name="file"
               />
             </div>
             <div className="col">
