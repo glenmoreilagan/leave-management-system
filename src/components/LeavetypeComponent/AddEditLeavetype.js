@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import axios from "axios"
+import axiosConfig from "../../axiosConfig"
 
 import Breadcrumb from '../BreadcrumbComponent/Breadcrumb'
 
@@ -19,7 +20,7 @@ const AddEditLeavetype = () => {
 
   const saveLeavetype = () => {
     if (id === "create") {
-      axios.post("http://localhost:3001/leavetypes/create", leavetype)
+      axiosConfig.post(`/leavetypes/create`, leavetype)
       .then((res) => {
         console.log(res)
       })
@@ -27,7 +28,7 @@ const AddEditLeavetype = () => {
         console.log(res)
       })
     } else {
-      axios.put(`http://localhost:3001/leavetypes/${id}`, leavetype)
+      axiosConfig.put(`/leavetypes/${id}`, leavetype)
       .then((res) => {
         console.log(res)
         // if (res.status == 200) {
@@ -46,7 +47,7 @@ const AddEditLeavetype = () => {
 
   useEffect(() => {
     if (id != "create") {
-      axios.get(`http://localhost:3001/leavetypes/${id}`)
+      axiosConfig.get(`/leavetypes/${id}`)
       .then((res) => {
         console.log(res)
         if (res.status == 200) {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
+import axiosConfig from "../../axiosConfig"
 
 const LookupLeaveType = (props) => {
   const [leavetype, setLeavetype] = useState([])
@@ -17,7 +18,7 @@ const LookupLeaveType = (props) => {
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/leavetypes`)
+    axiosConfig.get(`/leavetypes`)
     .then((res) => {
       console.log(res)
       let list = []

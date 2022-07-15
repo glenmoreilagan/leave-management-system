@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import '../../css/TableStyle.css'
 import axios from 'axios'
+import axiosConfig from "../../axiosConfig"
 
 
 import LeavetypeList from './LeavetypeList'
@@ -11,7 +12,7 @@ const LeavetypeIndex = () => {
   const [isLoading, setIsloading] = useState(true)
 
   const deleteLeavetype = (id) => {
-    axios.delete(`http://localhost:3001/leavetypes/${id}`)
+    axiosConfig.delete(`/leavetypes/${id}`)
     .then((res) => {
       console.log(res)
       if(res.status == 200) {
@@ -34,7 +35,7 @@ const LeavetypeIndex = () => {
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/leavetypes`)
+    axiosConfig.get(`/leavetypes`)
     .then(res => {
       console.log(res)
       let list = []

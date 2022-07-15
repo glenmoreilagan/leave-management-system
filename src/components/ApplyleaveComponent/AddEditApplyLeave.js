@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import axios from "axios"
+import axiosConfig from "../../axiosConfig"
 import dateFormat from 'dateformat'
 
 import Breadcrumb from '../BreadcrumbComponent/Breadcrumb'
@@ -23,7 +24,7 @@ const AddEditApplyLeave = () => {
 
   const saveLeave = () => {
     if (id === "create") {
-      axios.post("http://localhost:3001/leaves/create", leave)
+      axiosConfig.post("/leaves/create", leave)
       .then((res) => {
         console.log(res)
       })
@@ -31,7 +32,7 @@ const AddEditApplyLeave = () => {
         console.log(res)
       })
     } else {
-      axios.put(`http://localhost:3001/leaves/${id}`, leave)
+      axiosConfig.put(`/leaves/${id}`, leave)
       .then((res) => {
         console.log(res)
         // if (res.status == 200) {
@@ -50,7 +51,7 @@ const AddEditApplyLeave = () => {
 
   useEffect(() => {
     if (id != "create") {
-      axios.get(`http://localhost:3001/leaves/${id}`)
+      axiosConfig.get(`/leaves/${id}`)
       .then((res) => {
         console.log(res)
         if (res.status == 200) {

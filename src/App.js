@@ -19,57 +19,44 @@ import AddEditLeavetype from './components/LeavetypeComponent/AddEditLeavetype';
 import ApplyLeaveIndex from './components/ApplyleaveComponent/ApplyLeaveIndex';
 import AddEditApplyLeave from './components/ApplyleaveComponent/AddEditApplyLeave';
 
+// LOGIN
+import LoginIndex from './components/LoginComponent/LoginIndex';
+
 
 function App() {
   return (
     <Router>
-      <div className="main">
-        <Sidebar />
-        <div className="container">
-          <Switch>
-            {/* EMPLOYEE */}
-              <Route exact path="/">
-                <EmployeeIndex />
-              </Route>
-              <Route exact path="/employees">
-                <EmployeeIndex />
-              </Route>
-              <Route exact path="/employees/:id"> {/** NEW/EDIT **/}
-                <AddEditEmployee />
-              </Route>
-            {/* EMPLOYEE */}
+      <Switch>
+        <Route exact path="/"><LoginIndex /></Route>
+        <div className="main">
+          <Sidebar />
+          <div className="container">
+              {/* EMPLOYEE */}
+                <Route exact path="/employees"><EmployeeIndex /></Route>
+                {/** NEW/EDIT **/}
+                <Route exact path="/employees/:id"><AddEditEmployee /></Route>
+              {/* EMPLOYEE */}
 
-            {/* DEPARTMENT */}
-              <Route exact path="/departments">
-                <DepartmentIndex />
-              </Route>
-              <Route exact path="/departments/:id"> {/** NEW/EDIT **/}
-                <AddEditDepartment />
-              </Route>
-            {/* DEPARTMENT */}
-            
-            {/* LEAVETYPE */}
-              <Route exact path="/leavetypes">
-                <LeavetypeIndex />
-              </Route>
-              <Route exact path="/leavetypes/:id"> {/** NEW/EDIT **/}
-                <AddEditLeavetype />
-              </Route>
-            {/* LEAVETYPE */}
-            
-            {/* APPLY LEAVE */}
-              <Route exact path="/applyleaves">
-                <ApplyLeaveIndex />
-                {/* <AddEditApplyLeave /> */}
-              </Route>
-              <Route exact path="/applyleaves/:id"> {/** NEW/EDIT **/}
-                <AddEditApplyLeave />
-              </Route>
-            {/* APPLY LEAVE */}
-
-          </Switch>
+              {/* DEPARTMENT */}
+                <Route exact path="/departments"><DepartmentIndex /></Route>
+                {/** NEW/EDIT **/}
+                <Route exact path="/departments/:id"><AddEditDepartment /></Route>
+              {/* DEPARTMENT */}
+              
+              {/* LEAVETYPE */}
+                <Route exact path="/leavetypes"><LeavetypeIndex /></Route>
+                {/** NEW/EDIT **/}
+                <Route exact path="/leavetypes/:id"><AddEditLeavetype /></Route>
+              {/* LEAVETYPE */}
+              
+              {/* APPLYLEAVE */}
+                <Route exact path="/applyleaves"><ApplyLeaveIndex /></Route>
+                {/** NEW/EDIT **/}
+                <Route exact path="/applyleaves/:id"><AddEditApplyLeave /></Route>
+              {/* APPLYLEAVE */}
+          </div>
         </div>
-      </div>
+      </Switch>
     </Router>
   );
 }

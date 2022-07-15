@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import '../../css/TableStyle.css'
 import axios from 'axios'
+import axiosConfig from "../../axiosConfig"
 
 import DepartmentList from './DepartmentList'
 
@@ -10,7 +11,7 @@ const DepartmentIndex = () => {
   const [isLoading, setIsloading] = useState(true)
 
   const deleteDepartment = (id) => {
-    axios.delete(`http://localhost:3001/departments/${id}`)
+    axiosConfig.delete(`/departments/${id}`)
     .then((res) => {
       console.log(res)
       if(res.status == 200) {
@@ -34,7 +35,7 @@ const DepartmentIndex = () => {
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/departments`)
+    axiosConfig.get(`/departments`)
     .then(res => {
       console.log(res)
       let list = []

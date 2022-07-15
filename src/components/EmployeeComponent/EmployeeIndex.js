@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import '../../css/TableStyle.css'
 import axios from 'axios'
+import axiosConfig from "../../axiosConfig"
 
 
 import EmployeeList from './EmployeeList'
@@ -11,7 +12,7 @@ const EmployeeIndex = () => {
   const [isLoading, setIsloading] = useState(true)
 
   const deleteEmployee = (id) => {
-    axios.delete(`http://localhost:3001/employees/${id}`)
+    axiosConfig.delete(`/employees/${id}`)
     .then((res) => {
       console.log(res)
       if(res.status == 200) {
@@ -35,7 +36,7 @@ const EmployeeIndex = () => {
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/employees`)
+    axiosConfig.get(`/employees`)
     .then(res => {
       console.log(res)
       let list = []
@@ -46,7 +47,8 @@ const EmployeeIndex = () => {
             empcode : j.empcode,
             empname : j.empname,
             address : j.address,
-            phone : j.phone
+            phone : j.phone,
+            image: res.data[0].image,
           })
         })
       }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import "../../css/TableStyle.css"
 import axios from "axios"
+import axiosConfig from "../../axiosConfig"
 
 import ApplyLeaveList from './ApplyLeaveList'
 
@@ -10,7 +11,7 @@ const ApplyLeaveIndex = () => {
   const [isLoading, setIsloading] = useState(true)
 
   const deleteLeave = (id) => {
-    axios.delete(`http://localhost:3001/leaves/${id}`)
+    axiosConfig.delete(`/leaves/${id}`)
     .then((res) => {
       console.log(res)
       if (res.status == 200) {
@@ -40,7 +41,7 @@ const ApplyLeaveIndex = () => {
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/leaves`)
+    axiosConfig.get(`/leaves`)
     .then((res) => {
       console.log(res)
       let list = []

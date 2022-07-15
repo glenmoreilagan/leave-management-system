@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import axios from "axios"
+import axios from 'axios'
+import axiosConfig from "../../axiosConfig"
 
 import Breadcrumb from '../BreadcrumbComponent/Breadcrumb'
 
@@ -35,7 +36,7 @@ const AddEditEmployee = () => {
     }
 
     if (id === "create") {
-      axios.post("http://localhost:3001/employees/store", formData, config)
+      axiosConfig.post("/employees/store", formData, config)
       .then((res) => {
         console.log(res)
       })
@@ -43,7 +44,7 @@ const AddEditEmployee = () => {
         console.log(res)
       })
     } else {
-      axios.put(`http://localhost:3001/employees/${id}`, employee)
+      axiosConfig.put(`/employees/${id}`, employee)
       .then((res) => {
         console.log(res)
         // if (res.status == 200) {
@@ -67,7 +68,7 @@ const AddEditEmployee = () => {
 
   useEffect(() => {
     if (id != "create") {
-      axios.get(`http://localhost:3001/employees/${id}`)
+      axiosConfig.get(`/employees/${id}`)
       .then((res) => {
         console.log(res)
         if (res.status == 200) {
@@ -141,7 +142,7 @@ const AddEditEmployee = () => {
               />
             </div>
             <div className="col">
-              {/*  */}
+              <img src={ employee.image ? `http://localhost:3001/images/${employee.image}` : ''} />
             </div>
           </div>
         </div>
