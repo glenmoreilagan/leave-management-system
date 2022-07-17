@@ -12,7 +12,7 @@ const LeavetypeIndex = () => {
   const [isLoading, setIsloading] = useState(true)
 
   const deleteLeavetype = (id) => {
-    axiosConfig.delete(`/leavetypes/${id}`)
+    axiosConfig.delete(`/api/leavetypes/${id}`)
     .then((res) => {
       console.log(res)
       if(res.status == 200) {
@@ -35,7 +35,7 @@ const LeavetypeIndex = () => {
   }
 
   useEffect(() => {
-    axiosConfig.get(`/leavetypes`)
+    axiosConfig.get(`/api/leavetypes`)
     .then(res => {
       console.log(res)
       let list = []

@@ -11,7 +11,7 @@ const DepartmentIndex = () => {
   const [isLoading, setIsloading] = useState(true)
 
   const deleteDepartment = (id) => {
-    axiosConfig.delete(`/departments/${id}`)
+    axiosConfig.delete(`/api/departments/${id}`)
     .then((res) => {
       console.log(res)
       if(res.status == 200) {
@@ -35,7 +35,7 @@ const DepartmentIndex = () => {
   }
 
   useEffect(() => {
-    axiosConfig.get(`/departments`)
+    axiosConfig.get(`/api/departments`)
     .then(res => {
       console.log(res)
       let list = []

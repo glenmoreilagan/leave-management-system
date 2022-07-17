@@ -3,9 +3,10 @@ import axios from 'axios'
 // Next we make an 'instance' of it
 const instance = axios.create({
 // .. where we make our configurations
-    baseURL: 'http://localhost:3001'
+    // baseURL: 'http://localhost:3001' nodejs
+    baseURL: 'http://localhost:8000' // laravel
 })
-instance.defaults.withCredentials = true
+// instance.defaults.withCredentials = true
 
 // Where you would set stuff like your 'Authorization' header, etc ...
 // instance.defaults.headers.common['Authorization'] = 'AUTH TOKEN FROM INSTANCE'

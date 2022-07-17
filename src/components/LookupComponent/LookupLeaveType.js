@@ -11,14 +11,14 @@ const LookupLeaveType = (props) => {
   const selectLeavetype = (id, ltype) => {
     setLeave({
       ...leave,
-      leavetypeid : id,
+      leavetype_id : id,
       leavetype : ltype,
     })
     setClosemodal(true)
   }
 
   useEffect(() => {
-    axiosConfig.get(`/leavetypes`)
+    axiosConfig.get(`/api/leavetypes`)
     .then((res) => {
       console.log(res)
       let list = []
@@ -89,7 +89,7 @@ const LookupLeaveType = (props) => {
                             <td>{ltype.leavedescription}</td>
                             <td className="text-center">
                               <i 
-                                className="bi bi-check-square btn-action-icon"
+                                className="bi bi-check-square-fill btn-action-icon primary"
                                 title="Select" 
                                 onClick={() => selectLeavetype(ltype.id, ltype.leavetype)}
                                 data-bs-dismiss={closeModal == true ? 'modal' : ''}

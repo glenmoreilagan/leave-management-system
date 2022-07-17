@@ -12,10 +12,10 @@ const LeavetypeList = props => {
         <td>{ltype.leavedescription}</td>
         <td className='text-center'>
           <Link to={`/leavetypes/${ltype.id}`}>
-            <i className="bi bi-pencil-square btn-action-icon" title='Edit'></i>
+            <i className="bi bi-pencil-square btn-action-icon primary" title='Edit'></i>
           </Link>
           &nbsp;
-          <i className="bi bi-x-square btn-action-icon" title='Delete' onClick={() => deleteLeavetype(ltype.id)}></i>
+          <i className="bi bi-x-square-fill btn-action-icon danger" title='Delete' onClick={() => deleteLeavetype(ltype.id)}></i>
         </td>
       </tr>
     </React.Fragment>

@@ -20,7 +20,7 @@ const AddEditDepartment = () => {
 
   const saveDepartment = () => {
     if (id === "create") {
-      axiosConfig.post(`/departments/create`, department)
+      axiosConfig.post(`/api/departments`, department)
       .then((res) => {
         console.log(res)
       })
@@ -47,14 +47,14 @@ const AddEditDepartment = () => {
 
   useEffect(() => {
     if (id != "create") {
-      axiosConfig.get(`/departments/${id}`)
+      axiosConfig.get(`/api/departments/${id}`)
       .then((res) => {
         console.log(res)
         if (res.status == 200) {
           setDepartment({
-            deptprefix: res.data[0].deptprefix,
-            deptcode: res.data[0].deptcode,
-            deptname: res.data[0].deptname,
+            deptprefix: res.data.deptprefix,
+            deptcode: res.data.deptcode,
+            deptname: res.data.deptname,
           })
         }
       })

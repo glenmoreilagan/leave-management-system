@@ -3,6 +3,8 @@
 
 :root {
   --main-font-color: #495057;
+  --primary-color: #0B5ED7;
+  --danger-color: #BB2D3B;
 }
 /* width */
 ::-webkit-scrollbar {

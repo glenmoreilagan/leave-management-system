@@ -36,7 +36,7 @@ const AddEditEmployee = () => {
     }
 
     if (id === "create") {
-      axiosConfig.post("/employees/store", formData, config)
+      axiosConfig.post("/api/employees", formData, config)
       .then((res) => {
         console.log(res)
       })
@@ -44,7 +44,8 @@ const AddEditEmployee = () => {
         console.log(res)
       })
     } else {
-      axiosConfig.put(`/employees/${id}`, employee)
+      formData.append("_method", 'PUT')
+      axiosConfig.post(`/api/employees/${id}`, formData)
       .then((res) => {
         console.log(res)
         // if (res.status == 200) {
@@ -68,15 +69,15 @@ const AddEditEmployee = () => {
 
   useEffect(() => {
     if (id != "create") {
-      axiosConfig.get(`/employees/${id}`)
+      axiosConfig.get(`/api/employees/${id}`)
       .then((res) => {
         console.log(res)
         if (res.status == 200) {
           setEmployee({
-            empname: res.data[0].empname,
-            address: res.data[0].address,
-            phone: res.data[0].phone,
-            image: res.data[0].image,
+            empname: res.data.empname,
+            address: res.data.address,
+            phone: res.data.phone,
+            image: res.data.image,
           })
         }
       })
@@ -142,7 +143,7 @@ const AddEditEmployee = () => {
               />
             </div>
             <div className="col">
-              <img src={ employee.image ? `http://localhost:3001/images/${employee.image}` : ''} />
+              <img src={ employee.image ?? `http://localhost:3001/images/${employee.image}` } alt='Employee Image' />
             </div>
           </div>
         </div>

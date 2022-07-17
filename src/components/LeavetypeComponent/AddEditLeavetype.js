@@ -20,7 +20,7 @@ const AddEditLeavetype = () => {
 
   const saveLeavetype = () => {
     if (id === "create") {
-      axiosConfig.post(`/leavetypes/create`, leavetype)
+      axiosConfig.post(`/api/leavetypes`, leavetype)
       .then((res) => {
         console.log(res)
       })
@@ -28,7 +28,11 @@ const AddEditLeavetype = () => {
         console.log(res)
       })
     } else {
-      axiosConfig.put(`/leavetypes/${id}`, leavetype)
+      setLeavetype({
+        ...leavetype,
+        _method : 'PUT'
+      })
+      axiosConfig.put(`/api/leavetypes/${id}`, leavetype)
       .then((res) => {
         console.log(res)
         // if (res.status == 200) {
@@ -47,13 +51,13 @@ const AddEditLeavetype = () => {
 
   useEffect(() => {
     if (id != "create") {
-      axiosConfig.get(`/leavetypes/${id}`)
+      axiosConfig.get(`/api/leavetypes/${id}`)
       .then((res) => {
         console.log(res)
         if (res.status == 200) {
           setLeavetype({
-            leavetype: res.data[0].leavetype,
-            leavedescription: res.data[0].leavedescription,
+            leavetype: res.data.leavetype,
+            leavedescription: res.data.leavedescription,
           })
         }
       })

@@ -12,7 +12,7 @@ const EmployeeIndex = () => {
   const [isLoading, setIsloading] = useState(true)
 
   const deleteEmployee = (id) => {
-    axiosConfig.delete(`/employees/${id}`)
+    axiosConfig.delete(`/api/employees/${id}`)
     .then((res) => {
       console.log(res)
       if(res.status == 200) {
@@ -36,7 +36,7 @@ const EmployeeIndex = () => {
   }
 
   useEffect(() => {
-    axiosConfig.get(`/employees`)
+    axiosConfig.get(`/api/employees`)
     .then(res => {
       console.log(res)
       let list = []

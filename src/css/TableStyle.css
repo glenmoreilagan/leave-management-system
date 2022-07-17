@@ -28,6 +28,14 @@ table tbody tr td :is(.btn-action-icon, a) {
   font-size: 20px;
 }
 
+table tbody tr td :is(.primary):hover {
+  color: var(--primary-color);
+}
+
+table tbody tr td .btn-action-icon.danger:hover {
+  color: var(--danger-color);;
+}
+
 table tbody tr td :is(.font-bold) {
   font-weight: 500;
 }

@@ -14,10 +14,10 @@ const EmployeeList = props => {
         <td>{emp.phone}</td>
         <td className='text-center'>
           <Link to={`/employees/${emp.id}`}>
-            <i className="bi bi-pencil-square btn-action-icon" title='Edit'></i>
+            <i className="bi bi-pencil-square btn-action-icon primary" title='Edit'></i>
           </Link>
           &nbsp;
-          <i className="bi bi-x-square btn-action-icon" title='Delete' onClick={() => deleteEmployee(emp.id)}></i>
+          <i className="bi bi-x-square-fill btn-action-icon danger" title='Delete' onClick={() => deleteEmployee(emp.id)}></i>
         </td>
       </tr>
     </React.Fragment>

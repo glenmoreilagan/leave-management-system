@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 import "../../css/TableStyle.css"
 import axios from "axios"
@@ -9,9 +9,10 @@ import ApplyLeaveList from './ApplyLeaveList'
 const ApplyLeaveIndex = () => {
   const [leave, setLeave] = useState([])
   const [isLoading, setIsloading] = useState(true)
+  const previousLeave = useRef(null);
 
   const deleteLeave = (id) => {
-    axiosConfig.delete(`/leaves/${id}`)
+    axiosConfig.delete(`/api/leaves/${id}`)
     .then((res) => {
       console.log(res)
       if (res.status == 200) {
@@ -23,12 +24,12 @@ const ApplyLeaveIndex = () => {
               start_date : val.start_date,
               end_date : val.end_date,
               reason : val.reason,
-              empid : val.empid,
-              empcode : val.empcode,
-              empname : val.empname,
-              leavetypeid : val.leavetypeid,
-              leavetype : val.leavetype,
-              leavedescription : val.leavedescription
+              emp_id : val.emp_id,
+              empcode : val.employee.empcode,
+              empname : val.employee.empname,
+              leavetype_id : val.leavetype_id,
+              leavetype : val.leavetype.leavetype,
+              leavedescription : val.leavetype.leavedescription
             })
           }
         })
@@ -40,8 +41,20 @@ const ApplyLeaveIndex = () => {
     })
   }
 
+  const searchLeave = (e) => {
+    let search_str = e.target.value.toLowerCase();
+
+    let filteredLeave = previousLeave.current.filter((data) => {
+      return data.empcode.toLowerCase().includes(search_str) || data.empname.toLowerCase().includes(search_str)
+    })
+
+    if (e.key === "Enter") {
+      setLeave(filteredLeave)
+    }
+  }
+
   useEffect(() => {
-    axiosConfig.get(`/leaves`)
+    axiosConfig.get(`/api/leaves`)
     .then((res) => {
       console.log(res)
       let list = []
@@ -52,17 +65,18 @@ const ApplyLeaveIndex = () => {
             start_date : j.start_date,
             end_date : j.end_date,
             reason : j.reason,
-            empid : j.empid,
-            empcode : j.empcode,
-            empname : j.empname,
-            leavetypeid : j.leavetypeid,
-            leavetype : j.leavetype,
-            leavedescription : j.leavedescription
+            emp_id : j.emp_id,
+            empcode : j.employee !== null ? j.employee.empcode : '',
+            empname : j.employee !== null ? j.employee.empname : '',
+            leavetype_id : j.leavetype_id,
+            leavetype : j.leavetype !== null ? j.leavetype.leavetype : '',
+            leavedescription : j.leavetype !== null ? j.leavetype.leavedescription : ''
           })
         })
       }
 
       setLeave(list)
+      previousLeave.current = list;
       setIsloading(false)
     })
     .catch((err) => {
@@ -82,6 +96,7 @@ const ApplyLeaveIndex = () => {
           <button className="btn btn-primary btn-sm header-btn">NEW</button>
         </Link>
       </div>
+      <input type='text' name='search' className="form-control form-control-sm mb-3" placeholder="Search..." onKeyPress={(e) => searchLeave(e)} />
       <div className="table-responsive">
         <table className="table table-striped">
           <thead>
@@ -100,13 +115,7 @@ const ApplyLeaveIndex = () => {
               </tr>
             ) : (
               leave.map((liv, index) => {
-                return (
-                  <ApplyLeaveList
-                    key = {liv.id}
-                    leave = {liv}
-                    deleteLeave = {deleteLeave}
-                  />
-                )
+                return <ApplyLeaveList key = {liv.id} leave = {liv} deleteLeave = {deleteLeave} />
               })
             )}
           </tbody>

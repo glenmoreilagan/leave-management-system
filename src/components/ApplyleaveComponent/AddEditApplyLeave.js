@@ -10,7 +10,7 @@ import LookupLeaveType from "../LookupComponent/LookupLeaveType"
 const AddEditApplyLeave = () => {
   const { id } = useParams()
   const [leave, setLeave] = useState({
-    empid : 3
+    emp_id : 3
   })
 
   const inputOnChange = (e) => {
@@ -24,7 +24,7 @@ const AddEditApplyLeave = () => {
 
   const saveLeave = () => {
     if (id === "create") {
-      axiosConfig.post("/leaves/create", leave)
+      axiosConfig.post("/api/leaves", leave)
       .then((res) => {
         console.log(res)
       })
@@ -32,7 +32,7 @@ const AddEditApplyLeave = () => {
         console.log(res)
       })
     } else {
-      axiosConfig.put(`/leaves/${id}`, leave)
+      axiosConfig.put(`/api/leaves/${id}`, leave)
       .then((res) => {
         console.log(res)
         // if (res.status == 200) {
@@ -51,17 +51,17 @@ const AddEditApplyLeave = () => {
 
   useEffect(() => {
     if (id != "create") {
-      axiosConfig.get(`/leaves/${id}`)
+      axiosConfig.get(`/api/leaves/${id}`)
       .then((res) => {
         console.log(res)
         if (res.status == 200) {
           setLeave({
-            empid: res.data[0].empid,
-            leavetypeid: res.data[0].leavetypeid,
-            leavetype: res.data[0].leavetype,
-            reason: res.data[0].reason,
-            start_date: dateFormat(res.data[0].start_date, "yyyy-mm-dd"),
-            end_date: dateFormat(res.data[0].end_date, "yyyy-mm-dd"),
+            emp_id: res.data.emp_id,
+            leavetype_id: res.data.leavetype_id,
+            leavetype: res.data.leavetype,
+            reason: res.data.reason,
+            start_date: dateFormat(res.data.start_date, "yyyy-mm-dd"),
+            end_date: dateFormat(res.data.end_date, "yyyy-mm-dd"),
           })
         }
       })
