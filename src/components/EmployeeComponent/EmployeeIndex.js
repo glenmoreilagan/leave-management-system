@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import '../../css/TableStyle.css'
 import axios from 'axios'
@@ -10,6 +10,7 @@ import EmployeeList from './EmployeeList'
 const EmployeeIndex = () => {
   const [employee, setEmployee] = useState([])
   const [isLoading, setIsloading] = useState(true)
+  const previousEmployee = useRef(null)
 
   const deleteEmployee = (id) => {
     axiosConfig.delete(`/api/employees/${id}`)
@@ -35,6 +36,18 @@ const EmployeeIndex = () => {
     })
   }
 
+  const searchEmployee = (e) => {
+    let search_str = e.target.value.toLowerCase()
+
+    let filteredLeave = previousEmployee.current.filter((data) => {
+      return data.empcode.toLowerCase().includes(search_str) || data.empname.toLowerCase().includes(search_str)
+    })
+
+    // if (e.key === "Enter") {
+      setEmployee(filteredLeave)
+    // }
+  }
+
   useEffect(() => {
     axiosConfig.get(`/api/employees`)
     .then(res => {
@@ -54,6 +67,7 @@ const EmployeeIndex = () => {
       }
 
       setEmployee(list)
+      previousEmployee.current = list
       setIsloading(false)
     })
     .catch(err => {
@@ -71,6 +85,7 @@ const EmployeeIndex = () => {
       <div className='header-btn-div mb-3'>
         <Link to='/employees/create'><button className='btn btn-primary btn-sm header-btn'>NEW</button></Link>
       </div>
+      <input type='text' name='search' className="form-control form-control-sm mb-3" placeholder="Search..." onKeyPress={(e) => searchEmployee(e)} />
       <div className='table-responsive'>
         <table className='table table-striped'>
           <thead>

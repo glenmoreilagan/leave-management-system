@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import '../../css/TableStyle.css'
 import axios from 'axios'
@@ -10,6 +10,7 @@ import LeavetypeList from './LeavetypeList'
 const LeavetypeIndex = () => {
   const [leavetype, setLeavetype] = useState([])
   const [isLoading, setIsloading] = useState(true)
+  const previousEmployee = useRef(null)
 
   const deleteLeavetype = (id) => {
     axiosConfig.delete(`/api/leavetypes/${id}`)
@@ -34,6 +35,18 @@ const LeavetypeIndex = () => {
     })
   }
 
+  const searchLeaveType = (e) => {
+    let search_str = e.target.value.toLowerCase()
+
+    let filteredLeave = previousEmployee.current.filter((data) => {
+      return data.leavetype.toLowerCase().includes(search_str)
+    })
+
+    // if (e.key === "Enter") {
+      setLeavetype(filteredLeave)
+    // }
+  }
+
   useEffect(() => {
     axiosConfig.get(`/api/leavetypes`)
     .then(res => {
@@ -50,6 +63,7 @@ const LeavetypeIndex = () => {
       }
   
       setLeavetype(list)
+      previousEmployee.current = list
       setIsloading(false)
     })
     .catch(err => {
@@ -67,6 +81,7 @@ const LeavetypeIndex = () => {
       <div className='header-btn-div mb-3'>
         <Link to='/leavetypes/create'><button className='btn btn-primary btn-sm header-btn'>NEW</button></Link>
       </div>
+      <input type='text' name='search' className="form-control form-control-sm mb-3" placeholder="Search..." onKeyPress={(e) => searchLeaveType(e)} />
       <div className='table-responsive'>
         <table className='table table-striped'>
           <thead>

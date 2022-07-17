@@ -9,7 +9,7 @@ import ApplyLeaveList from './ApplyLeaveList'
 const ApplyLeaveIndex = () => {
   const [leave, setLeave] = useState([])
   const [isLoading, setIsloading] = useState(true)
-  const previousLeave = useRef(null);
+  const previousLeave = useRef(null)
 
   const deleteLeave = (id) => {
     axiosConfig.delete(`/api/leaves/${id}`)
@@ -42,15 +42,15 @@ const ApplyLeaveIndex = () => {
   }
 
   const searchLeave = (e) => {
-    let search_str = e.target.value.toLowerCase();
+    let search_str = e.target.value.toLowerCase()
 
     let filteredLeave = previousLeave.current.filter((data) => {
       return data.empcode.toLowerCase().includes(search_str) || data.empname.toLowerCase().includes(search_str)
     })
 
-    if (e.key === "Enter") {
+    // if (e.key === "Enter") {
       setLeave(filteredLeave)
-    }
+    // }
   }
 
   useEffect(() => {
@@ -76,7 +76,7 @@ const ApplyLeaveIndex = () => {
       }
 
       setLeave(list)
-      previousLeave.current = list;
+      previousLeave.current = list
       setIsloading(false)
     })
     .catch((err) => {
