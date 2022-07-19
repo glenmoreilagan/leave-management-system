@@ -4,7 +4,6 @@ import '../../css/TableStyle.css'
 import axios from 'axios'
 import axiosConfig from "../../axiosConfig"
 
-
 import LeavetypeList from './LeavetypeList'
 
 const LeavetypeIndex = () => {
@@ -48,6 +47,7 @@ const LeavetypeIndex = () => {
   }
 
   useEffect(() => {
+
     axiosConfig.get(`/api/leavetypes`)
     .then(res => {
       console.log(res)

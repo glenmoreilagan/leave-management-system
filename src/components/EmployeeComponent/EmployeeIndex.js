@@ -4,7 +4,6 @@ import '../../css/TableStyle.css'
 import axios from 'axios'
 import axiosConfig from "../../axiosConfig"
 
-
 import EmployeeList from './EmployeeList'
 
 const EmployeeIndex = () => {
@@ -65,7 +64,7 @@ const EmployeeIndex = () => {
           })
         })
       }
-
+      
       setEmployee(list)
       previousEmployee.current = list
       setIsloading(false)
@@ -73,7 +72,7 @@ const EmployeeIndex = () => {
     .catch(err => {
       console.log(err)
     })
-
+    
     // return console.log('Clean-Up')
   }, [])
 

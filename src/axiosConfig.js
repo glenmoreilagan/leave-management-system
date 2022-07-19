@@ -1,18 +1,12 @@
-// First we need to import axios.js
 import axios from 'axios'
-// Next we make an 'instance' of it
+
 const instance = axios.create({
-// .. where we make our configurations
     // baseURL: 'http://localhost:3001' nodejs
     baseURL: 'http://localhost:8000' // laravel
 })
-// instance.defaults.withCredentials = true
+instance.defaults.withCredentials = true
 
-// Where you would set stuff like your 'Authorization' header, etc ...
-// instance.defaults.headers.common['Authorization'] = 'AUTH TOKEN FROM INSTANCE'
-
-// Also add/ configure interceptors && all the other cool stuff
-
-// instance.interceptors.request
+const UserToken = JSON.parse(localStorage.getItem('UserToken'))
+instance.defaults.headers.common['Authorization'] = `Bearer ${UserToken}`
 
 export default instance
