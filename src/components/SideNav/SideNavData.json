@@ -31,5 +31,11 @@
     "icon": "bi bi-three-dots-vertical",
     "path": "/manageadmins",
     "class": "no-dropdown"
+  },
+  {
+    "title": "Logout",
+    "icon": "bi bi-three-dots-vertical",
+    "path": "/logout",
+    "class": "no-dropdown"
   }
 ]

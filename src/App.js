@@ -19,8 +19,10 @@ import AddEditLeavetype from './components/LeavetypeComponent/AddEditLeavetype';
 import ApplyLeaveIndex from './components/ApplyleaveComponent/ApplyLeaveIndex';
 import AddEditApplyLeave from './components/ApplyleaveComponent/AddEditApplyLeave';
 
-// LOGIN
+// LOGOUT
 import LoginIndex from './components/LoginComponent/LoginIndex';
+
+import LogoutIndex from './components/LoginComponent/LogoutIndex';
 
 
 function App() {
@@ -54,6 +56,11 @@ function App() {
                 {/** NEW/EDIT **/}
                 <Route exact path="/applyleaves/:id"><AddEditApplyLeave /></Route>
               {/* APPLYLEAVE */}
+              
+              {/* LOGOUT */}
+                <Route exact path="/logout"><LogoutIndex /></Route>
+                {/** NEW/EDIT **/}
+              {/* LOGOUT */}
           </div>
         </div>
       </Switch>

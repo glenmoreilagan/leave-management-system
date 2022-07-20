@@ -26,6 +26,7 @@ const LoginIndex = () => {
     .then((res) => {
       if (res.data.status) {
         localStorage.setItem('UserToken', JSON.stringify(res.data.token))
+        axiosConfig.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(localStorage.getItem('UserToken'))}`
         history.push("/employees")
       }
     })

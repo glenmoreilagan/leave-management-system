@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import axios from 'axios'
+import axios from "axios"
 import axiosConfig from "../../axiosConfig"
 
-import Breadcrumb from '../BreadcrumbComponent/Breadcrumb'
+import Card from "react-bootstrap/Card"
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button';
+
+
+import Breadcrumb from "../BreadcrumbComponent/Breadcrumb"
+import MyAlert from "../AlertComponent/AlertTemplate"
 
 const AddEditEmployee = () => {
   const { id } = useParams()
   const [employee, setEmployee] = useState([])
+  const [alertShow, setAlertShow] = useState(false)
+  const [msgAlert, setMsgAlert] = useState('')
 
-  const [file, setFile] = useState();
-  const [fileName, setFileName] = useState("");
+  const [file, setFile] = useState()
+  const [fileName, setFileName] = useState('')
 
   const inputOnChange = (e) => {
     const { name, value } = e.target
@@ -31,59 +39,70 @@ const AddEditEmployee = () => {
 
     let config = {
       headers: {
-        'content-type': 'multipart/form-data'
-      }
+        "content-type": "multipart/form-data",
+      },
     }
 
     if (id === "create") {
-      axiosConfig.post("/api/employees", formData, config)
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((res) => {
-        console.log(res)
-      })
+      axiosConfig
+        .post("/api/employees", formData, config)
+        .then((res) => {
+          console.log(res)
+          setAlertShow(true)
+          setMsgAlert('Save New Employee Success!')
+        })
+        .catch((res) => {
+          console.log(res)
+        })
     } else {
-      formData.append("_method", 'PUT')
-      axiosConfig.post(`/api/employees/${id}`, formData)
-      .then((res) => {
-        console.log(res)
-        // if (res.status == 200) {
-        //   setEmployee({
-        //     empname: res.data[0].empname,
-        //     address: res.data[0].address,
-        //     phone: res.data[0].phone,
-        //   })
-        // }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      formData.append("_method", "PUT")
+      axiosConfig
+        .post(`/api/employees/${id}`, formData)
+        .then((res) => {
+          console.log(res)
+          if (res.status == 200) {
+            setAlertShow(true)
+            setMsgAlert('Update Employee Success!')
+          //   setEmployee({
+          //     empname: res.data[0].empname,
+          //     address: res.data[0].address,
+          //     phone: res.data[0].phone,
+          //   })
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 
   const selectPic = (e) => {
-    setFile(e.target.files[0]);
-    setFileName(e.target.files[0].name);
+    setFile(e.target.files[0])
+    setFileName(e.target.files[0].name)
+  }
+
+  const closeAlert = (status) => {
+    setAlertShow(status)
   }
 
   useEffect(() => {
     if (id != "create") {
-      axiosConfig.get(`/api/employees/${id}`)
-      .then((res) => {
-        console.log(res)
-        if (res.status == 200) {
-          setEmployee({
-            empname: res.data.empname,
-            address: res.data.address,
-            phone: res.data.phone,
-            image: res.data.image,
-          })
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      axiosConfig
+        .get(`/api/employees/${id}`)
+        .then((res) => {
+          console.log(res)
+          if (res.status == 200) {
+            setEmployee({
+              empname: res.data.empname,
+              address: res.data.address,
+              phone: res.data.phone,
+              image: res.data.image,
+            })
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
 
     // return console.log('Clean-Up')
@@ -91,63 +110,70 @@ const AddEditEmployee = () => {
 
   return (
     <React.Fragment>
+      <MyAlert showAlert={alertShow} closeAlert={closeAlert} msgAlert={msgAlert}/>
       <Breadcrumb linkTo="employees" label="Employee" />
       {/* <div className='-header-title'><h5>EMPLOYEE</h5></div> */}
-      <div className="card">
-        <div className="card-body">
-          <div className="header-btn-div mb-3">
-            <button
-              className="btn btn-primary btn-sm header-btn"
-              onClick={saveEmployee}
-            >
-              SAVE
-            </button>
+      <Card body>
+        <div className="header-btn-div mb-3">
+          <Button 
+            onClick={saveEmployee}
+            variant="primary" 
+            className="header-btn"
+            size="sm"
+          >
+            SAVE
+          </Button>
+        </div>
+        <div className="row">
+          <div className="col">
+          <Form.Label htmlFor="empname">Employee Name</Form.Label>
+          <Form.Control
+            onChange={(e) => inputOnChange(e)}
+            type="text"
+            id="empname"
+            name="empname"
+            value={employee.empname || ""}
+            size='sm'
+          />
+          <Form.Label htmlFor="address">Address</Form.Label>
+          <Form.Control
+            onChange={(e) => inputOnChange(e)}
+            type="text"
+            id="address"
+            name="address"
+            value={employee.address || ""}
+            size='sm'
+            as='textarea'
+          />
+          <Form.Label htmlFor="phone">Contact No.</Form.Label>
+          <Form.Control
+            onChange={(e) => inputOnChange(e)}
+            type="text"
+            id="phone"
+            name="phone"
+            value={employee.phone || ""}
+            size='sm'
+          />
+          <Form.Label htmlFor="file">Picture</Form.Label>
+          <Form.Control
+            onChange={(e) => selectPic(e)}
+            type="file"
+            id="file"
+            name="file"
+            size='sm'
+          />
           </div>
-          <div className="row">
-            <div className="col">
-              <label htmlFor="empname">Employee Name</label>
-              <input
-                onChange={(e) => inputOnChange(e)}
-                type="text"
-                className="form-control form-control-sm"
-                id="empname"
-                name="empname"
-                value={employee.empname || ""}
-              />
-              <label htmlFor="address">Address</label>
-              <textarea
-                onChange={(e) => inputOnChange(e)}
-                type="text"
-                className="form-control form-control-sm"
-                id="address"
-                name="address"
-                value={employee.address || ""}
-              />
-              <label htmlFor="phone">Contact No.</label>
-              <input
-                onChange={(e) => inputOnChange(e)}
-                type="text"
-                className="form-control form-control-sm"
-                id="phone"
-                name="phone"
-                value={employee.phone || ""}
-              />
-              
-              <label htmlFor="file">Picture</label>
-              <input
-                onChange={(e) => selectPic(e)}
-                type="file"
-                className="form-control form-control-sm"
-                id="file"
-                name="file"
-              />
-            </div>
-            <div className="col">
-              <img src={ employee.image ?? `http://localhost:3001/images/${employee.image}` } alt='Employee Image' />
-            </div>
+          <div className="col">
+            <img
+              src={
+                employee.image ??
+                `http://localhost:3001/images/${employee.image}`
+              }
+              alt="Employee Image"
+            />
           </div>
         </div>
-      </div>
+      </Card>
     </React.Fragment>
   )
 }

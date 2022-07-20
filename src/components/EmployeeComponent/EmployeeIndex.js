@@ -5,11 +5,14 @@ import axios from 'axios'
 import axiosConfig from "../../axiosConfig"
 
 import EmployeeList from './EmployeeList'
+import MyAlert from "../AlertComponent/AlertTemplate"
 
 const EmployeeIndex = () => {
   const [employee, setEmployee] = useState([])
   const [isLoading, setIsloading] = useState(true)
   const previousEmployee = useRef(null)
+  const [alertShow, setAlertShow] = useState(false)
+  const [msgAlert, setMsgAlert] = useState('')
 
   const deleteEmployee = (id) => {
     axiosConfig.delete(`/api/employees/${id}`)
@@ -21,12 +24,15 @@ const EmployeeIndex = () => {
           if(id != val.id) {
             list.push({
               id : val.id,
+              empcode : val.empcode,
               empname : val.empname,
               address : val.address,
               phone : val.phone
             })
           }
         })
+        setAlertShow(true)
+        setMsgAlert('Delete Employee Success!')
         setEmployee(list)
       }
     })
@@ -45,6 +51,10 @@ const EmployeeIndex = () => {
     // if (e.key === "Enter") {
       setEmployee(filteredLeave)
     // }
+  }
+
+  const closeAlert = (status) => {
+    setAlertShow(status)
   }
 
   useEffect(() => {
@@ -78,6 +88,7 @@ const EmployeeIndex = () => {
 
   return (
     <React.Fragment>
+      <MyAlert showAlert={alertShow} closeAlert={closeAlert} msgAlert={msgAlert}/>
       <div className='mb-3'>
         <h5>EMPLOYEE LIST</h5>
       </div>
