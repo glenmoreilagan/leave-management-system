@@ -1,7 +1,7 @@
-import Sidebar from './components/SideNav/SideBar'
+import React from 'react';
+// import Sidebar from './components/SideNav/SideBar'
 
-
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 
 // EMPLOYEE
 import EmployeeIndex from './components/EmployeeComponent/EmployeeIndex';
@@ -19,50 +19,56 @@ import AddEditLeavetype from './components/LeavetypeComponent/AddEditLeavetype';
 import ApplyLeaveIndex from './components/ApplyleaveComponent/ApplyLeaveIndex';
 import AddEditApplyLeave from './components/ApplyleaveComponent/AddEditApplyLeave';
 
-// LOGOUT
+// LOGIN/LOGOUT
 import LoginIndex from './components/LoginComponent/LoginIndex';
-
 import LogoutIndex from './components/LoginComponent/LogoutIndex';
+
+// REDIRECTS
+import NotFound from './components/RedirectsComponent/NotFound';
 
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/"><LoginIndex /></Route>
-        <div className="main">
-          <Sidebar />
-          <div className="container">
-              {/* EMPLOYEE */}
-                <Route exact path="/employees"><EmployeeIndex /></Route>
-                {/** NEW/EDIT **/}
-                <Route exact path="/employees/:id"><AddEditEmployee /></Route>
-              {/* EMPLOYEE */}
+        <React.Fragment>
+          {/* LOGIN */}
+          <Route exact path="/"><LoginIndex /></Route>
+          <Route exact path="/login"><LoginIndex /></Route>
+          {/* LOGIN */}
 
-              {/* DEPARTMENT */}
-                <Route exact path="/departments"><DepartmentIndex /></Route>
-                {/** NEW/EDIT **/}
-                <Route exact path="/departments/:id"><AddEditDepartment /></Route>
-              {/* DEPARTMENT */}
-              
-              {/* LEAVETYPE */}
-                <Route exact path="/leavetypes"><LeavetypeIndex /></Route>
-                {/** NEW/EDIT **/}
-                <Route exact path="/leavetypes/:id"><AddEditLeavetype /></Route>
-              {/* LEAVETYPE */}
-              
-              {/* APPLYLEAVE */}
-                <Route exact path="/applyleaves"><ApplyLeaveIndex /></Route>
-                {/** NEW/EDIT **/}
-                <Route exact path="/applyleaves/:id"><AddEditApplyLeave /></Route>
-              {/* APPLYLEAVE */}
-              
-              {/* LOGOUT */}
-                <Route exact path="/logout"><LogoutIndex /></Route>
-                {/** NEW/EDIT **/}
-              {/* LOGOUT */}
-          </div>
-        </div>
+          {/* EMPLOYEE */}
+            <Route exact path="/employees"><EmployeeIndex /></Route>
+            {/** NEW/EDIT **/}
+            <Route exact path="/employees/:id"><AddEditEmployee /></Route>
+          {/* EMPLOYEE */}
+
+          {/* DEPARTMENT */}
+            <Route exact path="/departments"><DepartmentIndex /></Route>
+            {/** NEW/EDIT **/}
+            <Route exact path="/departments/:id"><AddEditDepartment /></Route>
+          {/* DEPARTMENT */}
+          
+          {/* LEAVETYPE */}
+            <Route exact path="/leavetypes"><LeavetypeIndex /></Route>
+            {/** NEW/EDIT **/}
+            <Route exact path="/leavetypes/:id"><AddEditLeavetype /></Route>
+          {/* LEAVETYPE */}
+          
+          {/* APPLYLEAVE */}
+            <Route exact path="/applyleaves"><ApplyLeaveIndex /></Route>
+            {/** NEW/EDIT **/}
+            <Route exact path="/applyleaves/:id"><AddEditApplyLeave /></Route>
+          {/* APPLYLEAVE */}
+          
+          {/* LOGOUT */}
+            <Route exact path="/logout"><LogoutIndex /></Route>
+          {/* LOGOUT */}
+          
+          
+          {/* <Route exact path="/404"><NotFound /></Route> */}
+          {/* <Route exact path='*'><Redirect to="/404" /></Route> */}
+        </React.Fragment>
       </Switch>
     </Router>
   );

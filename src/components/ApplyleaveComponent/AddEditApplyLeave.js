@@ -6,6 +6,7 @@ import dateFormat from 'dateformat'
 
 import Breadcrumb from '../BreadcrumbComponent/Breadcrumb'
 import LookupLeaveType from "../LookupComponent/LookupLeaveType"
+import SideBar from "../SideNav/SideBar"
 
 const AddEditApplyLeave = () => {
   const { id } = useParams()
@@ -75,75 +76,79 @@ const AddEditApplyLeave = () => {
 
   return (
     <React.Fragment>
-      <Breadcrumb linkTo="applyleaves" label="Apply Leave" />
-      {/* <div className='-header-title'><h5>APPLY LEAVE</h5></div> */}
-      <div className="card">
-        <div className="card-body">
-          <div className="header-btn-div mb-3">
-            <button
-              className="btn btn-primary btn-sm header-btn"
-              onClick={saveLeave}
-            >
-              SAVE
-            </button>
-          </div>
-          <div className="row">
-            <div className="col">
-              <label htmlFor="start_date">Start Date</label>
-              <input
-                name="start_date"
-                type="date"
-                className="form-control form-control-sm"
-                id="start_date"
-                onChange={(e) => inputOnChange(e)}
-                value={leave.start_date || ""}
-              />
-              <label htmlFor="end_date">End Date</label>
-              <input
-                name="end_date"
-                type="date"
-                className="form-control form-control-sm"
-                id="end_date"
-                onChange={(e) => inputOnChange(e)}
-                value={leave.end_date || ""}
-              />
-              <label htmlFor="leavetype">Leave Type</label>
-              <div className="input-group">
-                <input 
-                  name="leavetype"
-                  type="text" 
-                  className="form-control form-control-sm" 
-                  id="leavetype"
-                  onChange={(e) => inputOnChange(e)}
-                  value={leave.leavetype || ""}
-                  readOnly
-                />
-                <button 
-                  className="btn btn-primary btn-sm" 
-                  type="button" 
-                  data-bs-toggle="modal" 
-                  data-bs-target="#LookupLeaveType"
+      <SideBar />
+      <div className="main">
+        <div className="container">
+          <Breadcrumb linkTo="applyleaves" label="Apply Leave" />
+          {/* <div className='-header-title'><h5>APPLY LEAVE</h5></div> */}
+          <div className="card">
+            <div className="card-body">
+              <div className="header-btn-div mb-3">
+                <button
+                  className="btn btn-primary btn-sm header-btn"
+                  onClick={saveLeave}
                 >
-                  <i className="bi bi-list"></i>
+                  SAVE
                 </button>
               </div>
-              <label htmlFor="reason">Reason</label>
-              <textarea
-                name="reason"
-                type="text"
-                className="form-control form-control-sm"
-                id="reason"
-                onChange={(e) => inputOnChange(e)}
-                value={leave.reason || ""}
-              />
-            </div>
-            <div className="col">
-              {/*  */}
+              <div className="row">
+                <div className="col">
+                  <label htmlFor="start_date">Start Date</label>
+                  <input
+                    name="start_date"
+                    type="date"
+                    className="form-control form-control-sm"
+                    id="start_date"
+                    onChange={(e) => inputOnChange(e)}
+                    value={leave.start_date || ""}
+                  />
+                  <label htmlFor="end_date">End Date</label>
+                  <input
+                    name="end_date"
+                    type="date"
+                    className="form-control form-control-sm"
+                    id="end_date"
+                    onChange={(e) => inputOnChange(e)}
+                    value={leave.end_date || ""}
+                  />
+                  <label htmlFor="leavetype">Leave Type</label>
+                  <div className="input-group">
+                    <input 
+                      name="leavetype"
+                      type="text" 
+                      className="form-control form-control-sm" 
+                      id="leavetype"
+                      onChange={(e) => inputOnChange(e)}
+                      value={leave.leavetype || ""}
+                      readOnly
+                    />
+                    <button 
+                      className="btn btn-primary btn-sm" 
+                      type="button" 
+                      data-bs-toggle="modal" 
+                      data-bs-target="#LookupLeaveType"
+                    >
+                      <i className="bi bi-list"></i>
+                    </button>
+                  </div>
+                  <label htmlFor="reason">Reason</label>
+                  <textarea
+                    name="reason"
+                    type="text"
+                    className="form-control form-control-sm"
+                    id="reason"
+                    onChange={(e) => inputOnChange(e)}
+                    value={leave.reason || ""}
+                  />
+                </div>
+                <div className="col">
+                  {/*  */}
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
       <LookupLeaveType leave={leave} setLeave={setLeave} />
     </React.Fragment>
   )

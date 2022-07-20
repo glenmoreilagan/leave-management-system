@@ -5,6 +5,7 @@ import axios from 'axios'
 import axiosConfig from "../../axiosConfig"
 
 import LeavetypeList from './LeavetypeList'
+import SideBar from '../SideNav/SideBar'
 
 const LeavetypeIndex = () => {
   const [leavetype, setLeavetype] = useState([])
@@ -47,7 +48,6 @@ const LeavetypeIndex = () => {
   }
 
   useEffect(() => {
-
     axiosConfig.get(`/api/leavetypes`)
     .then(res => {
       console.log(res)
@@ -75,37 +75,42 @@ const LeavetypeIndex = () => {
 
   return (
     <React.Fragment>
-      <div className='mb-3'>
-        <h5>LEAVE TYPE LIST</h5>
-      </div>
-      <div className='header-btn-div mb-3'>
-        <Link to='/leavetypes/create'><button className='btn btn-primary btn-sm header-btn'>NEW</button></Link>
-      </div>
-      <input type='text' name='search' className="form-control form-control-sm mb-3" placeholder="Search..." onKeyPress={(e) => searchLeaveType(e)} />
-      <div className='table-responsive'>
-        <table className='table table-striped'>
-          <thead>
-            <tr>
-              <th className='sm'>LEAVE TYPE</th>
-              <th className='md'>LEAVE DESCRIPTION</th>
-              <th className='text-center sm'>ACTION</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              isLoading ? <tr style={{textAlign:'center'}}><td colSpan={5}>loading...</td></tr>
-              : leavetype.map((ltype, index) => { 
-                return (
-                  <LeavetypeList 
-                    key = {ltype.id} 
-                    ltype = {ltype}
-                    deleteLeavetype = {deleteLeavetype}
-                  />
-                ) 
-              })
-            }
-          </tbody>
-        </table>
+      <SideBar />
+      <div className="main">
+        <div className="container">
+          <div className='mb-3'>
+            <h5>LEAVE TYPE LIST</h5>
+          </div>
+          <div className='header-btn-div mb-3'>
+            <Link to='/leavetypes/create'><button className='btn btn-primary btn-sm header-btn'>NEW</button></Link>
+          </div>
+          <input type='text' name='search' className="form-control form-control-sm mb-3" placeholder="Search..." onKeyPress={(e) => searchLeaveType(e)} />
+          <div className='table-responsive'>
+            <table className='table table-striped'>
+              <thead>
+                <tr>
+                  <th className='sm'>LEAVE TYPE</th>
+                  <th className='md'>LEAVE DESCRIPTION</th>
+                  <th className='text-center sm'>ACTION</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  isLoading ? <tr style={{textAlign:'center'}}><td colSpan={5}>loading...</td></tr>
+                  : leavetype.map((ltype, index) => { 
+                    return (
+                      <LeavetypeList 
+                        key = {ltype.id} 
+                        ltype = {ltype}
+                        deleteLeavetype = {deleteLeavetype}
+                      />
+                    ) 
+                  })
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </React.Fragment>
   )

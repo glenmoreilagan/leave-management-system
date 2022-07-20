@@ -82,7 +82,7 @@ const LoginIndex = () => {
         </div>
       </div>
 
-      <div className="custom-shape-divider-bottom-1658081064">
+      {/* <div className="custom-shape-divider-bottom-1658081064">
         <svg
           data-name="Layer 1"
           xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +104,7 @@ const LoginIndex = () => {
             className="shape-fill"
           ></path>
         </svg>
-      </div>
+      </div> */}
     </div>
   )
 }

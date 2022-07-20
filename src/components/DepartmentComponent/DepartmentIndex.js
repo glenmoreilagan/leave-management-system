@@ -5,6 +5,7 @@ import axios from 'axios'
 import axiosConfig from "../../axiosConfig"
 
 import DepartmentList from './DepartmentList'
+import SideBar from '../SideNav/SideBar'
 
 const DepartmentIndex = () => {
   const [department, setDepartment] = useState([])
@@ -76,38 +77,43 @@ const DepartmentIndex = () => {
 
   return (
     <React.Fragment>
-      <div className='mb-3'>
-        <h5>DEPARTMENT LIST</h5>
-      </div>
-      <div className='header-btn-div mb-3'>
-        <Link to='/departments/create'><button className='btn btn-primary btn-sm header-btn'>NEW</button></Link>
-      </div>
-      <input type='text' name='search' className="form-control form-control-sm mb-3" placeholder="Search..." onKeyPress={(e) => searchDepartment(e)} />
-      <div className='table-responsive'>
-        <table className='table table-striped'>
-          <thead>
-            <tr>
-              <th className='sm'>DEPARTMENT PREFIX</th>
-              <th className='md'>DEPARTMENT CODE</th>
-              <th className='lg'>DEPARTMENT NAME</th>
-              <th className='text-center sm'>ACTION</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              isLoading ? <tr style={{textAlign:'center'}}><td colSpan={5}>loading...</td></tr>
-              : department.map((dept, index) => { 
-                return (
-                  <DepartmentList 
-                    key = {dept.id} 
-                    dept = {dept} 
-                    deleteDepartment = {deleteDepartment}
-                  />
-                ) 
-              })
-            }
-          </tbody>
-        </table>
+      <SideBar />
+      <div className="main">
+        <div className="container">
+          <div className='mb-3'>
+            <h5>DEPARTMENT LIST</h5>
+          </div>
+          <div className='header-btn-div mb-3'>
+            <Link to='/departments/create'><button className='btn btn-primary btn-sm header-btn'>NEW</button></Link>
+          </div>
+          <input type='text' name='search' className="form-control form-control-sm mb-3" placeholder="Search..." onKeyPress={(e) => searchDepartment(e)} />
+          <div className='table-responsive'>
+            <table className='table table-striped'>
+              <thead>
+                <tr>
+                  <th className='sm'>DEPARTMENT PREFIX</th>
+                  <th className='md'>DEPARTMENT CODE</th>
+                  <th className='lg'>DEPARTMENT NAME</th>
+                  <th className='text-center sm'>ACTION</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  isLoading ? <tr style={{textAlign:'center'}}><td colSpan={5}>loading...</td></tr>
+                  : department.map((dept, index) => { 
+                    return (
+                      <DepartmentList 
+                        key = {dept.id} 
+                        dept = {dept} 
+                        deleteDepartment = {deleteDepartment}
+                      />
+                    ) 
+                  })
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </React.Fragment>
   )

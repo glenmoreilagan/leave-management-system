@@ -9,21 +9,20 @@ const LogoutIndex = () => {
   const history = History()
 
   useEffect(() => {
-    axiosConfig.post(`/api/logout`, {withCredentials : true})
-    .then((res) => {
-      if (res.data.status) {
-        localStorage.removeItem("UserToken");
-        history.push("/")
-      }
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    axiosConfig
+      .post(`/api/logout`, { withCredentials: true })
+      .then((res) => {
+        if (res.data.status) {
+          localStorage.removeItem("UserToken")
+          history.push("/")
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   })
 
-  return (
-    <div className="main-div-logout"></div>
-  )
+  return <div className="main-div-logout">Logout</div>
 }
 
 export default LogoutIndex

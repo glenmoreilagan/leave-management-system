@@ -4,6 +4,7 @@ import axios from "axios"
 import axiosConfig from "../../axiosConfig"
 
 import Breadcrumb from '../BreadcrumbComponent/Breadcrumb'
+import SideBar from "../SideNav/SideBar"
 
 const AddEditLeavetype = () => {
   const { id } = useParams()
@@ -71,38 +72,43 @@ const AddEditLeavetype = () => {
 
   return (
     <React.Fragment>
-      <Breadcrumb linkTo="leavetypes" label="Leave Type" />
-      {/* <div className='-header-title'><h5>DEPARTMENT</h5></div> */}
-      <div className="card">
-        <div className="card-body">
-          <div className="header-btn-div mb-3">
-            <button
-              className="btn btn-primary btn-sm header-btn"
-              onClick={saveLeavetype}
-            >
-              SAVE
-            </button>
-          </div>
-          <div className="row">
-            <div className="col">
-              <label htmlFor="leavetype">Leave Type</label>
-              <input
-                onChange={(e) => inputOnChange(e)}
-                type="text"
-                className="form-control form-control-sm"
-                id="leavetype"
-                name="leavetype"
-                value={leavetype.leavetype || ""}
-              />
-              <label htmlFor="leavedescription">Leave Description</label>
-              <textarea
-                onChange={(e) => inputOnChange(e)}
-                type="text"
-                className="form-control form-control-sm"
-                id="leavedescription"
-                name="leavedescription"
-                value={leavetype.leavedescription || ""}
-              />
+      <SideBar />
+      <div className="main">
+        <div className="container">
+          <Breadcrumb linkTo="leavetypes" label="Leave Type" />
+          {/* <div className='-header-title'><h5>DEPARTMENT</h5></div> */}
+          <div className="card">
+            <div className="card-body">
+              <div className="header-btn-div mb-3">
+                <button
+                  className="btn btn-primary btn-sm header-btn"
+                  onClick={saveLeavetype}
+                >
+                  SAVE
+                </button>
+              </div>
+              <div className="row">
+                <div className="col">
+                  <label htmlFor="leavetype">Leave Type</label>
+                  <input
+                    onChange={(e) => inputOnChange(e)}
+                    type="text"
+                    className="form-control form-control-sm"
+                    id="leavetype"
+                    name="leavetype"
+                    value={leavetype.leavetype || ""}
+                  />
+                  <label htmlFor="leavedescription">Leave Description</label>
+                  <textarea
+                    onChange={(e) => inputOnChange(e)}
+                    type="text"
+                    className="form-control form-control-sm"
+                    id="leavedescription"
+                    name="leavedescription"
+                    value={leavetype.leavedescription || ""}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -7,9 +7,9 @@ import Card from "react-bootstrap/Card"
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
 
-
 import Breadcrumb from "../BreadcrumbComponent/Breadcrumb"
 import MyAlert from "../AlertComponent/AlertTemplate"
+import SideBar from "../SideNav/SideBar"
 
 const AddEditEmployee = () => {
   const { id } = useParams()
@@ -110,70 +110,75 @@ const AddEditEmployee = () => {
 
   return (
     <React.Fragment>
-      <MyAlert showAlert={alertShow} closeAlert={closeAlert} msgAlert={msgAlert}/>
-      <Breadcrumb linkTo="employees" label="Employee" />
-      {/* <div className='-header-title'><h5>EMPLOYEE</h5></div> */}
-      <Card body>
-        <div className="header-btn-div mb-3">
-          <Button 
-            onClick={saveEmployee}
-            variant="primary" 
-            className="header-btn"
-            size="sm"
-          >
-            SAVE
-          </Button>
+      <SideBar />
+      <div className="main">
+        <div className="container">
+          <MyAlert showAlert={alertShow} closeAlert={closeAlert} msgAlert={msgAlert}/>
+          <Breadcrumb linkTo="employees" label="Employee" />
+          {/* <div className='-header-title'><h5>EMPLOYEE</h5></div> */}
+          <Card body>
+            <div className="header-btn-div mb-3">
+              <Button 
+                onClick={saveEmployee}
+                variant="primary" 
+                className="header-btn"
+                size="sm"
+              >
+                SAVE
+              </Button>
+            </div>
+            <div className="row">
+              <div className="col">
+              <Form.Label htmlFor="empname">Employee Name</Form.Label>
+              <Form.Control
+                onChange={(e) => inputOnChange(e)}
+                type="text"
+                id="empname"
+                name="empname"
+                value={employee.empname || ""}
+                size='sm'
+              />
+              <Form.Label htmlFor="address">Address</Form.Label>
+              <Form.Control
+                onChange={(e) => inputOnChange(e)}
+                type="text"
+                id="address"
+                name="address"
+                value={employee.address || ""}
+                size='sm'
+                as='textarea'
+              />
+              <Form.Label htmlFor="phone">Contact No.</Form.Label>
+              <Form.Control
+                onChange={(e) => inputOnChange(e)}
+                type="text"
+                id="phone"
+                name="phone"
+                value={employee.phone || ""}
+                size='sm'
+              />
+              <Form.Label htmlFor="file">Picture</Form.Label>
+              <Form.Control
+                onChange={(e) => selectPic(e)}
+                type="file"
+                id="file"
+                name="file"
+                size='sm'
+              />
+              </div>
+              <div className="col">
+                <img
+                  src={
+                    employee.image ??
+                    `http://localhost:3001/images/${employee.image}`
+                  }
+                  alt="Employee Image"
+                />
+              </div>
+            </div>
+          </Card>
         </div>
-        <div className="row">
-          <div className="col">
-          <Form.Label htmlFor="empname">Employee Name</Form.Label>
-          <Form.Control
-            onChange={(e) => inputOnChange(e)}
-            type="text"
-            id="empname"
-            name="empname"
-            value={employee.empname || ""}
-            size='sm'
-          />
-          <Form.Label htmlFor="address">Address</Form.Label>
-          <Form.Control
-            onChange={(e) => inputOnChange(e)}
-            type="text"
-            id="address"
-            name="address"
-            value={employee.address || ""}
-            size='sm'
-            as='textarea'
-          />
-          <Form.Label htmlFor="phone">Contact No.</Form.Label>
-          <Form.Control
-            onChange={(e) => inputOnChange(e)}
-            type="text"
-            id="phone"
-            name="phone"
-            value={employee.phone || ""}
-            size='sm'
-          />
-          <Form.Label htmlFor="file">Picture</Form.Label>
-          <Form.Control
-            onChange={(e) => selectPic(e)}
-            type="file"
-            id="file"
-            name="file"
-            size='sm'
-          />
-          </div>
-          <div className="col">
-            <img
-              src={
-                employee.image ??
-                `http://localhost:3001/images/${employee.image}`
-              }
-              alt="Employee Image"
-            />
-          </div>
-        </div>
-      </Card>
+      </div>
     </React.Fragment>
   )
 }

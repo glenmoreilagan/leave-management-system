@@ -39,3 +39,22 @@ table tbody tr td .btn-action-icon.danger:hover {
 table tbody tr td :is(.font-bold) {
   font-weight: 500;
 }
+
+table tbody tr td :is(.custom-badge-primary, .custom-badge-secondary, .custom-badge-danger) {
+  border-radius: 50rem !important;
+}
+
+.custom-badge-primary {
+  background-color: rgba(13, 110, 253, 0.2) !important;
+  color: rgba(13, 110, 253, 1) !important;
+}
+
+.custom-badge-secondary {
+  background-color: rgba(108,117,125, 0.2) !important;
+  color: rgba(108,117,125, 1) !important;
+}
+
+.custom-badge-danger {
+  background-color: rgba(220,53,69, 0.2) !important;
+  color: rgba(220,53,69, 1) !important;
+}
