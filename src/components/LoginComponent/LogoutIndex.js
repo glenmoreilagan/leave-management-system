@@ -14,6 +14,8 @@ const LogoutIndex = () => {
       .then((res) => {
         if (res.data.status) {
           localStorage.removeItem("UserToken")
+          sessionStorage.removeItem('user')
+
           history.push("/")
         }
       })

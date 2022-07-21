@@ -7,6 +7,7 @@ import dateFormat from 'dateformat'
 import Breadcrumb from '../BreadcrumbComponent/Breadcrumb'
 import LookupLeaveType from "../LookupComponent/LookupLeaveType"
 import MyAlert from "../AlertComponent/AlertTemplate"
+import SideBar from "../SideNav/SideBar"
 
 const AddEditApplyLeave = () => {
   const { id } = useParams()
@@ -24,7 +25,12 @@ const AddEditApplyLeave = () => {
   }
 
   const saveLeave = () => {
+    let e_id = JSON.parse(sessionStorage.getItem('user')).e_id
     if (id === "create") {
+      setLeave({
+        ...leave,
+        emp_id : e_id
+      })
       axiosConfig.post("/api/leaves", leave)
       .then((res) => {
         console.log(res)
@@ -62,12 +68,14 @@ const AddEditApplyLeave = () => {
         console.log(res)
         if (res.status === 200) {
           setLeave({
-            emp_id: res.data.emp_id,
-            leavetype_id: res.data.leavetype_id,
-            leavetype: res.data.leavetype,
-            reason: res.data.reason,
-            start_date: dateFormat(res.data.start_date, "yyyy-mm-dd"),
-            end_date: dateFormat(res.data.end_date, "yyyy-mm-dd"),
+            emp_id: res.data[0].emp_id,
+            leavetype_id: res.data[0].leavetype_id,
+            leavetype: res.data[0].leavetype.leavetype,
+            reason: res.data[0].reason,
+            start_date: res.data[0].start_date,
+            end_date: res.data[0].end_date,
+            // start_date: dateFormat(res.data.start_date, "yyyy-mm-dd"),
+            // end_date: dateFormat(res.data.end_date, "yyyy-mm-dd"),
           })
         }
       })
@@ -81,6 +89,7 @@ const AddEditApplyLeave = () => {
 
   return (
     <React.Fragment>
+      <SideBar />
       <div className="main">
         <div className="container">
           <MyAlert showAlert={alertShow} closeAlert={closeAlert} msgAlert={msgAlert} />

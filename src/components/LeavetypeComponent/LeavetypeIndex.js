@@ -6,6 +6,7 @@ import axiosConfig from "../../axiosConfig"
 
 import LeavetypeList from './LeavetypeList'
 import MyAlert from "../AlertComponent/AlertTemplate"
+import SideBar from '../SideNav/SideBar'
 
 const LeavetypeIndex = () => {
   const [leavetype, setLeavetype] = useState([])
@@ -85,6 +86,7 @@ const LeavetypeIndex = () => {
 
   return (
     <React.Fragment>
+      <SideBar />
       <div className="main">
         <div className="container">
           <MyAlert showAlert={alertShow} closeAlert={closeAlert} msgAlert={msgAlert}/>

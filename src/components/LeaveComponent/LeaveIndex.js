@@ -4,11 +4,11 @@ import "../../css/TableStyle.css"
 // import axios from "axios"
 import axiosConfig from "../../axiosConfig"
 
-import ApplyLeaveList from './ApplyLeaveList'
+import LeaveList from './LeaveList'
 import MyAlert from "../AlertComponent/AlertTemplate"
 import SideBar from "../SideNav/SideBar"
 
-const ApplyLeaveIndex = () => {
+const LeaveIndex = () => {
   const [leave, setLeave] = useState([])
   const [isLoading, setIsloading] = useState(true)
   const previousLeave = useRef(null)
@@ -52,6 +52,30 @@ const ApplyLeaveIndex = () => {
     })
   }
 
+  const approveLeave = (id, index) => {
+    axiosConfig
+    .put(`/api/leaves/approveLeave/${id}`)
+    .then((res) => {
+      console.log(res)
+      if (res.status === 200) {
+        const newState = leave.map(liv => {
+          // 👇️ if id equals 2, update country property
+          if (liv.id === id) {
+            return {...liv, status: 1};
+          }
+    
+          // 👇️ otherwise return object as is
+          return liv;
+        });
+    
+        setLeave(newState);
+      }
+    })
+    .catch((res) => {
+      console.log(res)
+    })
+  }
+
   const searchLeave = (e) => {
     let search_str = e.target.value.toLowerCase()
 
@@ -69,8 +93,7 @@ const ApplyLeaveIndex = () => {
   }
 
   useEffect(() => {
-    let e_id = JSON.parse(sessionStorage.getItem('user')).e_id
-    axiosConfig.get(`/api/leaves/myLeaves/${e_id}`)
+    axiosConfig.get(`/api/leaves`)
     .then((res) => {
       console.log(res)
       let list = []
@@ -113,9 +136,9 @@ const ApplyLeaveIndex = () => {
             <h5>LEAVE LIST</h5>
           </div>
           <div className="header-btn-div mb-3">
-            <Link to="/applyleaves/create">
+            {/* <Link to="/applyleaves/create">
               <button className="btn btn-primary btn-sm header-btn">NEW</button>
-            </Link>
+            </Link> */}
           </div>
           <input type='text' name='search' className="form-control form-control-sm mb-3" placeholder="Search..." onKeyPress={(e) => searchLeave(e)} />
           <div className="table-responsive">
@@ -137,11 +160,12 @@ const ApplyLeaveIndex = () => {
                   </tr>
                 ) : (
                   leave.map((liv, index) => {
-                    return <ApplyLeaveList 
+                    return <LeaveList 
                       key = {liv.id} 
                       leave = {liv} 
                       index = {index}
                       deleteLeave = {deleteLeave} 
+                      approveLeave = {approveLeave} 
                     />
                   })
                 )}
@@ -154,4 +178,4 @@ const ApplyLeaveIndex = () => {
   )
 }
 
-export default ApplyLeaveIndex
+export default LeaveIndex

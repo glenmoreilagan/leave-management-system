@@ -8,6 +8,10 @@ import { useHistory as History } from "react-router-dom"
 const LoginIndex = () => {
   const history = History()
   const [userLogin, setUserlogin] = useState({})
+  const [errorCreds, setErrorCreds] = useState({
+    email : '',
+    password : ''
+  })
 
   const onChangeInput = (e) => {
     const { name, value } = e.target
@@ -24,11 +28,23 @@ const LoginIndex = () => {
       if (res.data.status) {
         localStorage.setItem('UserToken', JSON.stringify(res.data.token))
         axiosConfig.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(localStorage.getItem('UserToken'))}`
+
+        sessionStorage.setItem("user", JSON.stringify({
+          e_id : res.data.user.emp_id, 
+          name : res.data.user.name, 
+          role : res.data.role,
+        }))
+
         history.push("/employees")
       }
     })
     .catch((err) => {
       console.log(err)
+      setErrorCreds({
+        ...errorCreds,
+        email : err.response.data.errors.email[0],
+        password : err.response.data.errors.password[0],
+      })
     })
   }
 
@@ -42,14 +58,14 @@ const LoginIndex = () => {
     .catch((err) => {
       console.log(err)
     })
-  })
-
+  }, [])
+  console.log(errorCreds)
   return (
     <div className="main-div-login">
       <div className="login-div">
         <h4 className="mb-3">SIGN IN</h4>
         <div className="div-email mb-3">
-          <label>Email</label>
+          <label>Email</label> <sup className="text-danger">{errorCreds.email}</sup>
           <input
             type="text"
             name="email"
@@ -59,7 +75,7 @@ const LoginIndex = () => {
           />
         </div>
         <div className="div-password mb-3">
-          <label>Password</label>
+          <label>Password</label> <sup className="text-danger">{errorCreds.password}</sup>
           <input
             type="password"
             name="password"
@@ -69,17 +85,18 @@ const LoginIndex = () => {
           />
         </div>
 
+        <a href="#">Forgot password?</a>
         <div className="div-login-btn">
           <button className="btn btn-sm btn-login" onClick={btnLogin}>
             LOGIN
           </button>
-          <button className="btn btn-link btn-sm btn-register">
+          {/* <button className="btn btn-link btn-sm btn-register">
             Don't have account?
-          </button>
+          </button> */}
         </div>
       </div>
 
-      {/* <div className="custom-shape-divider-bottom-1658081064">
+      <div className="custom-shape-divider-bottom-1658081064">
         <svg
           data-name="Layer 1"
           xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +118,7 @@ const LoginIndex = () => {
             className="shape-fill"
           ></path>
         </svg>
-      </div> */}
+      </div>
     </div>
   )
 }

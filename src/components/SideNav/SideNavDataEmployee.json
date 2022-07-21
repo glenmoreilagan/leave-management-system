@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Profile",
+    "icon": "bi bi-three-dots-vertical",
+    "path": "/profile",
+    "class": "no-dropdown"
+  },
+  {
+    "title": "Apply Leave",
+    "icon": "bi bi-three-dots-vertical",
+    "path": "/applyleaves",
+    "class": "no-dropdown"
+  },
+  {
+    "title": "Logout",
+    "icon": "bi bi-three-dots-vertical",
+    "path": "/logout",
+    "class": "no-dropdown"
+  }
+]

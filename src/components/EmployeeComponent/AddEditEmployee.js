@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 
 import Breadcrumb from "../BreadcrumbComponent/Breadcrumb"
 import MyAlert from "../AlertComponent/AlertTemplate"
+import SideBar from "../SideNav/SideBar"
 
 const AddEditEmployee = () => {
   const { id } = useParams()
@@ -109,6 +110,7 @@ const AddEditEmployee = () => {
 
   return (
     <React.Fragment>
+      <SideBar />
       <div className="main">
         <div className="container">
           <MyAlert showAlert={alertShow} closeAlert={closeAlert} msgAlert={msgAlert}/>

@@ -19,6 +19,9 @@ import AddEditLeavetype from './components/LeavetypeComponent/AddEditLeavetype';
 import ApplyLeaveIndex from './components/ApplyleaveComponent/ApplyLeaveIndex';
 import AddEditApplyLeave from './components/ApplyleaveComponent/AddEditApplyLeave';
 
+// LEAVE
+import LeaveIndex from './components/LeaveComponent/LeaveIndex';
+
 // LOGIN/LOGOUT
 import LoginIndex from './components/LoginComponent/LoginIndex';
 import LogoutIndex from './components/LoginComponent/LogoutIndex';
@@ -36,7 +39,7 @@ function App() {
           <Route exact path="/"><LoginIndex /></Route>
           <Route exact path="/login"><LoginIndex /></Route>
           {/* LOGIN */}
-          <SideBar />
+          {/* <SideBar /> */}
           {/* EMPLOYEE */}
             <Route exact path="/employees"><EmployeeIndex /></Route>
             {/** NEW/EDIT **/}
@@ -60,6 +63,12 @@ function App() {
             {/** NEW/EDIT **/}
             <Route exact path="/applyleaves/:id"><AddEditApplyLeave /></Route>
           {/* APPLYLEAVE */}
+          
+          {/* LEAVE */}
+            <Route exact path="/leaves"><LeaveIndex /></Route>
+            {/** NEW/EDIT **/}
+            {/* <Route exact path="/leaves/:id"><LeaveIndex /></Route> */}
+          {/* LEAVE */}
           
           {/* LOGOUT */}
             <Route exact path="/logout"><LogoutIndex /></Route>

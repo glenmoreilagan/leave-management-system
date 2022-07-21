@@ -6,6 +6,7 @@ import axiosConfig from "../../axiosConfig"
 
 import DepartmentList from './DepartmentList'
 import MyAlert from "../AlertComponent/AlertTemplate"
+import SideBar from '../SideNav/SideBar'
 
 const DepartmentIndex = () => {
   const [department, setDepartment] = useState([])
@@ -87,6 +88,7 @@ const DepartmentIndex = () => {
 
   return (
     <React.Fragment>
+      <SideBar />
       <div className="main">
         <div className="container">
           <MyAlert showAlert={alertShow} closeAlert={closeAlert} msgAlert={msgAlert} />

@@ -7,6 +7,7 @@ import redirectLogin from "../../redirectLogin"
 
 import EmployeeList from "./EmployeeList"
 import MyAlert from "../AlertComponent/AlertTemplate"
+import SideBar from "../SideNav/SideBar"
 
 const EmployeeIndex = () => {
   const [employee, setEmployee] = useState([])
@@ -93,11 +94,15 @@ const EmployeeIndex = () => {
         console.log(err)
       })
 
+      // console.log(JSON.parse(sessionStorage.getItem('user')))
+      
+
     // return console.log('Clean-Up')
   }, [])
 
   return (
     <React.Fragment>
+      <SideBar />
       <div className="main">
         <div className="container">
           <MyAlert

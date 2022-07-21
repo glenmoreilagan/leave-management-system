@@ -21,9 +21,9 @@
     ]
   },
   {
-    "title": "Apply Leave",
+    "title": "Leave",
     "icon": "bi bi-three-dots-vertical",
-    "path": "/applyleaves",
+    "path": "/leaves",
     "class": "no-dropdown"
   },
   {

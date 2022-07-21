@@ -5,6 +5,7 @@ import axiosConfig from "../../axiosConfig"
 
 import Breadcrumb from '../BreadcrumbComponent/Breadcrumb'
 import MyAlert from "../AlertComponent/AlertTemplate"
+import SideBar from "../SideNav/SideBar"
 
 const AddEditDepartment = () => {
   const { id } = useParams()
@@ -76,6 +77,7 @@ const AddEditDepartment = () => {
 
   return (
     <React.Fragment>
+      <SideBar />
       <div className="main">
         <div className="container">
           <MyAlert showAlert={alertShow} closeAlert={closeAlert} msgAlert={msgAlert} />
