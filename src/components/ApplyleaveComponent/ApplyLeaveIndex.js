@@ -1,23 +1,25 @@
 import React, { useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 import "../../css/TableStyle.css"
-import axios from "axios"
+// import axios from "axios"
 import axiosConfig from "../../axiosConfig"
 
 import ApplyLeaveList from './ApplyLeaveList'
-import SideBar from "../SideNav/SideBar"
+import MyAlert from "../AlertComponent/AlertTemplate"
 
 const ApplyLeaveIndex = () => {
   const [leave, setLeave] = useState([])
   const [isLoading, setIsloading] = useState(true)
   const previousLeave = useRef(null)
+  const [alertShow, setAlertShow] = useState(false)
+  const [msgAlert, setMsgAlert] = useState("")
 
   const deleteLeave = (id) => {
     axiosConfig
     .delete(`/api/leaves/${id}`)
     .then((res) => {
       console.log(res)
-      if (res.status == 200) {
+      if (res.status === 200) {
         // let list = []
         // leave.map((val, index) => {
         //   if (id != val.id) {
@@ -39,6 +41,9 @@ const ApplyLeaveIndex = () => {
         // setLeave(list)
 
         setLeave(leave => leave.filter((liv) => liv.id !== id))
+        
+        setAlertShow(true)
+        setMsgAlert(res.data.message)
       }
     })
     .catch((res) => {
@@ -51,7 +56,7 @@ const ApplyLeaveIndex = () => {
     .put(`/api/leaves/approveLeave/${id}`)
     .then((res) => {
       console.log(res)
-      if (res.status == 200) {
+      if (res.status === 200) {
         const newState = leave.map(liv => {
           // 👇️ if id equals 2, update country property
           if (liv.id === id) {
@@ -82,13 +87,17 @@ const ApplyLeaveIndex = () => {
     // }
   }
 
+  const closeAlert = (status) => {
+    setAlertShow(status)
+  }
+
   useEffect(() => {
     axiosConfig.get(`/api/leaves`)
     .then((res) => {
       console.log(res)
       let list = []
-      if (res.status == 200) {
-        res.data.map((j) => {
+      if (res.status === 200) {
+        res.data.forEach((j) => {
           list.push({
             id: j.id,
             start_date : j.start_date,
@@ -118,9 +127,9 @@ const ApplyLeaveIndex = () => {
 
   return (
     <React.Fragment>
-      <SideBar />
       <div className="main">
         <div className="container">
+          <MyAlert showAlert={alertShow} closeAlert={closeAlert} msgAlert={msgAlert} />
           <div className="mb-3">
             <h5>LEAVE LIST</h5>
           </div>

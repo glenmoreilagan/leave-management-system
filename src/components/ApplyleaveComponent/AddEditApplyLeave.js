@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
-import axios from "axios"
+import { useParams } from "react-router-dom"
+// import axios from "axios"
 import axiosConfig from "../../axiosConfig"
 import dateFormat from 'dateformat'
 
 import Breadcrumb from '../BreadcrumbComponent/Breadcrumb'
 import LookupLeaveType from "../LookupComponent/LookupLeaveType"
-import SideBar from "../SideNav/SideBar"
+import MyAlert from "../AlertComponent/AlertTemplate"
 
 const AddEditApplyLeave = () => {
   const { id } = useParams()
-  const [leave, setLeave] = useState({
-    emp_id : 3
-  })
+  const [leave, setLeave] = useState({})
+  const [alertShow, setAlertShow] = useState(false)
+  const [msgAlert, setMsgAlert] = useState("")
 
   const inputOnChange = (e) => {
     const { name, value } = e.target
@@ -28,6 +28,10 @@ const AddEditApplyLeave = () => {
       axiosConfig.post("/api/leaves", leave)
       .then((res) => {
         console.log(res)
+        if (res.status === 200) {
+          setAlertShow(true)
+          setMsgAlert(res.data.message)
+        }
       })
       .catch((res) => {
         console.log(res)
@@ -36,13 +40,10 @@ const AddEditApplyLeave = () => {
       axiosConfig.put(`/api/leaves/${id}`, leave)
       .then((res) => {
         console.log(res)
-        // if (res.status == 200) {
-        //   setDepartment({
-        //     empname: res.data[0].empname,
-        //     address: res.data[0].address,
-        //     phone: res.data[0].phone,
-        //   })
-        // }
+        if (res.status === 200) {
+          setAlertShow(true)
+          setMsgAlert(res.data.message)
+        }
       })
       .catch((err) => {
         console.log(err)
@@ -50,12 +51,16 @@ const AddEditApplyLeave = () => {
     }
   }
 
+  const closeAlert = (status) => {
+    setAlertShow(status)
+  }
+
   useEffect(() => {
-    if (id != "create") {
+    if (id !== "create") {
       axiosConfig.get(`/api/leaves/${id}`)
       .then((res) => {
         console.log(res)
-        if (res.status == 200) {
+        if (res.status === 200) {
           setLeave({
             emp_id: res.data.emp_id,
             leavetype_id: res.data.leavetype_id,
@@ -72,13 +77,13 @@ const AddEditApplyLeave = () => {
     }
 
     // return console.log('Clean-Up')
-  }, [])
+  }, [id])
 
   return (
     <React.Fragment>
-      <SideBar />
       <div className="main">
         <div className="container">
+          <MyAlert showAlert={alertShow} closeAlert={closeAlert} msgAlert={msgAlert} />
           <Breadcrumb linkTo="applyleaves" label="Apply Leave" />
           {/* <div className='-header-title'><h5>APPLY LEAVE</h5></div> */}
           <div className="card">

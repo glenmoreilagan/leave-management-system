@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 import "../../css/TableStyle.css"
-import axios from "axios"
+// import axios from "axios"
 import axiosConfig from "../../axiosConfig"
 import redirectLogin from "../../redirectLogin"
 
 import EmployeeList from "./EmployeeList"
 import MyAlert from "../AlertComponent/AlertTemplate"
-import SideBar from "../SideNav/SideBar"
 
 const EmployeeIndex = () => {
   const [employee, setEmployee] = useState([])
@@ -21,22 +20,24 @@ const EmployeeIndex = () => {
       .delete(`/api/employees/${id}`)
       .then((res) => {
         console.log(res)
-        if (res.status == 200) {
-          let list = []
-          employee.map((val, index) => {
-            if (id != val.id) {
-              list.push({
-                id: val.id,
-                empcode: val.empcode,
-                empname: val.empname,
-                address: val.address,
-                phone: val.phone,
-              })
-            }
-          })
+        if (res.status === 200) {
+          // let list = []
+          // employee.forEach((val, index) => {
+          //   if (id !== val.id) {
+          //     list.push({
+          //       id: val.id,
+          //       empcode: val.empcode,
+          //       empname: val.empname,
+          //       address: val.address,
+          //       phone: val.phone,
+          //     })
+          //   }
+          // })
+          // setEmployee(list)
+
+          setEmployee(employee => employee.filter((emp) => emp.id !== id))
           setAlertShow(true)
-          setMsgAlert("Delete Employee Success!")
-          setEmployee(list)
+          setMsgAlert(res.data.message)
         }
       })
       .catch((res) => {
@@ -70,8 +71,8 @@ const EmployeeIndex = () => {
       .then((res) => {
         console.log(res)
         let list = []
-        if (res.status == 200) {
-          res.data.map((j) => {
+        if (res.status === 200) {
+          res.data.forEach((j) => {
             list.push({
               id: j.id,
               empcode: j.empcode,
@@ -96,7 +97,6 @@ const EmployeeIndex = () => {
 
   return (
     <React.Fragment>
-      <SideBar />
       <div className="main">
         <div className="container">
           <MyAlert

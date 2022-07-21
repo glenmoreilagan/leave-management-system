@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
-import axios from "axios"
+import { useParams } from "react-router-dom"
+// import axios from "axios"
 import axiosConfig from "../../axiosConfig"
 
 import Breadcrumb from '../BreadcrumbComponent/Breadcrumb'
-import SideBar from "../SideNav/SideBar"
+import MyAlert from "../AlertComponent/AlertTemplate"
 
 const AddEditLeavetype = () => {
   const { id } = useParams()
   const [leavetype, setLeavetype] = useState([])
+  const [alertShow, setAlertShow] = useState(false)
+  const [msgAlert, setMsgAlert] = useState('')
 
   const inputOnChange = (e) => {
     const { name, value } = e.target
@@ -24,6 +26,10 @@ const AddEditLeavetype = () => {
       axiosConfig.post(`/api/leavetypes`, leavetype)
       .then((res) => {
         console.log(res)
+        if (res.status === 200) {
+          setAlertShow(true)
+          setMsgAlert(res.data.message)
+        }
       })
       .catch((res) => {
         console.log(res)
@@ -36,13 +42,10 @@ const AddEditLeavetype = () => {
       axiosConfig.put(`/api/leavetypes/${id}`, leavetype)
       .then((res) => {
         console.log(res)
-        // if (res.status == 200) {
-        //   setLeavetype({
-        //     empname: res.data[0].empname,
-        //     address: res.data[0].address,
-        //     phone: res.data[0].phone,
-        //   })
-        // }
+        if (res.status === 200) {
+          setAlertShow(true)
+          setMsgAlert(res.data.message)
+        }
       })
       .catch((err) => {
         console.log(err)
@@ -50,12 +53,16 @@ const AddEditLeavetype = () => {
     }
   }
 
+  const closeAlert = (status) => {
+    setAlertShow(status)
+  }
+
   useEffect(() => {
-    if (id != "create") {
+    if (id !== "create") {
       axiosConfig.get(`/api/leavetypes/${id}`)
       .then((res) => {
         console.log(res)
-        if (res.status == 200) {
+        if (res.status === 200) {
           setLeavetype({
             leavetype: res.data.leavetype,
             leavedescription: res.data.leavedescription,
@@ -68,13 +75,13 @@ const AddEditLeavetype = () => {
     }
 
     // return console.log('Clean-Up')
-  }, [])
+  }, [id])
 
   return (
     <React.Fragment>
-      <SideBar />
       <div className="main">
         <div className="container">
+          <MyAlert showAlert={alertShow} closeAlert={closeAlert} msgAlert={msgAlert}/>
           <Breadcrumb linkTo="leavetypes" label="Leave Type" />
           {/* <div className='-header-title'><h5>DEPARTMENT</h5></div> */}
           <div className="card">

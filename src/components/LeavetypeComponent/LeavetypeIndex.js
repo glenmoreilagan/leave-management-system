@@ -1,33 +1,39 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import '../../css/TableStyle.css'
-import axios from 'axios'
+// import axios from 'axios'
 import axiosConfig from "../../axiosConfig"
 
 import LeavetypeList from './LeavetypeList'
-import SideBar from '../SideNav/SideBar'
+import MyAlert from "../AlertComponent/AlertTemplate"
 
 const LeavetypeIndex = () => {
   const [leavetype, setLeavetype] = useState([])
   const [isLoading, setIsloading] = useState(true)
   const previousEmployee = useRef(null)
+  const [alertShow, setAlertShow] = useState(false)
+  const [msgAlert, setMsgAlert] = useState('')
 
   const deleteLeavetype = (id) => {
     axiosConfig.delete(`/api/leavetypes/${id}`)
     .then((res) => {
       console.log(res)
-      if(res.status == 200) {
-        let list = []
-        leavetype.map((val, index) => {
-          if(id != val.id) {
-            list.push({
-              id : val.id,
-              leavetype : val.leavetype,
-              leavedescription : val.leavedescription,
-            })
-          }
-        })
-        setLeavetype(list)
+      if(res.status === 200) {
+        // let list = []
+        // leavetype.forEach((val, index) => {
+        //   if(id !== val.id) {
+        //     list.push({
+        //       id : val.id,
+        //       leavetype : val.leavetype,
+        //       leavedescription : val.leavedescription,
+        //     })
+        //   }
+        // })
+        // setLeavetype(list)
+
+        setLeavetype(leavetype => leavetype.filter((ltype) => ltype.id !== id))
+        setAlertShow(true)
+        setMsgAlert(res.data.message)
       }
     })
     .catch((res) => {
@@ -47,13 +53,17 @@ const LeavetypeIndex = () => {
     // }
   }
 
+  const closeAlert = (status) => {
+    setAlertShow(status)
+  }
+
   useEffect(() => {
     axiosConfig.get(`/api/leavetypes`)
     .then(res => {
       console.log(res)
       let list = []
-      if(res.status == 200) {
-        res.data.map(j => {
+      if(res.status === 200) {
+        res.data.forEach(j => {
           list.push({
             id : j.id,
             leavetype : j.leavetype,
@@ -75,9 +85,9 @@ const LeavetypeIndex = () => {
 
   return (
     <React.Fragment>
-      <SideBar />
       <div className="main">
         <div className="container">
+          <MyAlert showAlert={alertShow} closeAlert={closeAlert} msgAlert={msgAlert}/>
           <div className='mb-3'>
             <h5>LEAVE TYPE LIST</h5>
           </div>

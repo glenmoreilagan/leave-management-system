@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
-import axios from "axios"
+import { useParams } from "react-router-dom"
+// import axios from "axios"
 import axiosConfig from "../../axiosConfig"
 
 import Breadcrumb from '../BreadcrumbComponent/Breadcrumb'
-import SideBar from "../SideNav/SideBar"
+import MyAlert from "../AlertComponent/AlertTemplate"
 
 const AddEditDepartment = () => {
   const { id } = useParams()
   const [department, setDepartment] = useState([])
+  const [alertShow, setAlertShow] = useState(false)
+  const [msgAlert, setMsgAlert] = useState("")
 
   const inputOnChange = (e) => {
     const { name, value } = e.target
@@ -24,21 +26,22 @@ const AddEditDepartment = () => {
       axiosConfig.post(`/api/departments`, department)
       .then((res) => {
         console.log(res)
+        if (res.status === 200) {
+          setAlertShow(true)
+          setMsgAlert(res.data.message)
+        }
       })
       .catch((res) => {
         console.log(res)
       })
     } else {
-      axiosConfig.put(`/department/${id}`, department)
+      axiosConfig.put(`/api/departments/${id}`, department)
       .then((res) => {
         console.log(res)
-        // if (res.status == 200) {
-        //   setDepartment({
-        //     empname: res.data[0].empname,
-        //     address: res.data[0].address,
-        //     phone: res.data[0].phone,
-        //   })
-        // }
+        if (res.status === 200) {
+          setAlertShow(true)
+          setMsgAlert(res.data.message)
+        }
       })
       .catch((err) => {
         console.log(err)
@@ -46,12 +49,16 @@ const AddEditDepartment = () => {
     }
   }
 
+  const closeAlert = (status) => {
+    setAlertShow(status)
+  }
+
   useEffect(() => {
-    if (id != "create") {
+    if (id !== "create") {
       axiosConfig.get(`/api/departments/${id}`)
       .then((res) => {
         console.log(res)
-        if (res.status == 200) {
+        if (res.status === 200) {
           setDepartment({
             deptprefix: res.data.deptprefix,
             deptcode: res.data.deptcode,
@@ -65,13 +72,13 @@ const AddEditDepartment = () => {
     }
 
     // return console.log('Clean-Up')
-  }, [])
+  }, [id])
 
   return (
     <React.Fragment>
-      <SideBar />
       <div className="main">
         <div className="container">
+          <MyAlert showAlert={alertShow} closeAlert={closeAlert} msgAlert={msgAlert} />
           <Breadcrumb linkTo="departments" label="Department" />
           {/* <div className='-header-title'><h5>DEPARTMENT</h5></div> */}
           <div className="card">

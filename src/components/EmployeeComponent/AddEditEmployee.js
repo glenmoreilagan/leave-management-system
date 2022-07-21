@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
-import axios from "axios"
+import { useParams } from "react-router-dom"
+// import axios from "axios"
 import axiosConfig from "../../axiosConfig"
 
 import Card from "react-bootstrap/Card"
@@ -9,7 +9,6 @@ import Button from 'react-bootstrap/Button';
 
 import Breadcrumb from "../BreadcrumbComponent/Breadcrumb"
 import MyAlert from "../AlertComponent/AlertTemplate"
-import SideBar from "../SideNav/SideBar"
 
 const AddEditEmployee = () => {
   const { id } = useParams()
@@ -48,8 +47,10 @@ const AddEditEmployee = () => {
         .post("/api/employees", formData, config)
         .then((res) => {
           console.log(res)
-          setAlertShow(true)
-          setMsgAlert('Save New Employee Success!')
+          if (res.status === 200) {
+            setAlertShow(true)
+            setMsgAlert(res.data.message)
+          }
         })
         .catch((res) => {
           console.log(res)
@@ -60,14 +61,9 @@ const AddEditEmployee = () => {
         .post(`/api/employees/${id}`, formData)
         .then((res) => {
           console.log(res)
-          if (res.status == 200) {
+          if (res.status === 200) {
             setAlertShow(true)
-            setMsgAlert('Update Employee Success!')
-          //   setEmployee({
-          //     empname: res.data[0].empname,
-          //     address: res.data[0].address,
-          //     phone: res.data[0].phone,
-          //   })
+            setMsgAlert(res.data.message)
           }
         })
         .catch((err) => {
@@ -86,12 +82,12 @@ const AddEditEmployee = () => {
   }
 
   useEffect(() => {
-    if (id != "create") {
+    if (id !== "create") {
       axiosConfig
         .get(`/api/employees/${id}`)
         .then((res) => {
           console.log(res)
-          if (res.status == 200) {
+          if (res.status === 200) {
             setEmployee({
               empname: res.data.empname,
               address: res.data.address,
@@ -106,11 +102,10 @@ const AddEditEmployee = () => {
     }
 
     // return console.log('Clean-Up')
-  }, [])
+  }, [id])
 
   return (
     <React.Fragment>
-      <SideBar />
       <div className="main">
         <div className="container">
           <MyAlert showAlert={alertShow} closeAlert={closeAlert} msgAlert={msgAlert}/>
@@ -130,50 +125,16 @@ const AddEditEmployee = () => {
             <div className="row">
               <div className="col">
               <Form.Label htmlFor="empname">Employee Name</Form.Label>
-              <Form.Control
-                onChange={(e) => inputOnChange(e)}
-                type="text"
-                id="empname"
-                name="empname"
-                value={employee.empname || ""}
-                size='sm'
-              />
+              <Form.Control onChange={(e) => inputOnChange(e)} type="text" id="empname" name="empname" value={employee.empname || ""} size='sm' />
               <Form.Label htmlFor="address">Address</Form.Label>
-              <Form.Control
-                onChange={(e) => inputOnChange(e)}
-                type="text"
-                id="address"
-                name="address"
-                value={employee.address || ""}
-                size='sm'
-                as='textarea'
-              />
+              <Form.Control onChange={(e) => inputOnChange(e)} type="text" id="address" name="address" value={employee.address || ""} size='sm' as='textarea' />
               <Form.Label htmlFor="phone">Contact No.</Form.Label>
-              <Form.Control
-                onChange={(e) => inputOnChange(e)}
-                type="text"
-                id="phone"
-                name="phone"
-                value={employee.phone || ""}
-                size='sm'
-              />
+              <Form.Control onChange={(e) => inputOnChange(e)} type="text" id="phone" name="phone" value={employee.phone || ""} size='sm' />
               <Form.Label htmlFor="file">Picture</Form.Label>
-              <Form.Control
-                onChange={(e) => selectPic(e)}
-                type="file"
-                id="file"
-                name="file"
-                size='sm'
-              />
+              <Form.Control onChange={(e) => selectPic(e)} type="file" id="file" name="file" size='sm' />
               </div>
               <div className="col">
-                <img
-                  src={
-                    employee.image ??
-                    `http://localhost:3001/images/${employee.image}`
-                  }
-                  alt="Employee Image"
-                />
+                <img src={employee.image ??`http://localhost:3001/images/${employee.image}`} alt="Employee Profile" />
               </div>
             </div>
           </Card>

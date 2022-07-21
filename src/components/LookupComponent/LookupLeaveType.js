@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import axios from "axios"
+// import axios from "axios"
 import axiosConfig from "../../axiosConfig"
 
 const LookupLeaveType = (props) => {
@@ -22,8 +22,8 @@ const LookupLeaveType = (props) => {
     .then((res) => {
       console.log(res)
       let list = []
-      if (res.status == 200) {
-        res.data.map((j) => {
+      if (res.status === 200) {
+        res.data.forEach((j) => {
           list.push({
             id: j.id,
             leavetype: j.leavetype,
@@ -92,7 +92,7 @@ const LookupLeaveType = (props) => {
                                 className="bi bi-check-square-fill btn-action-icon primary"
                                 title="Select" 
                                 onClick={() => selectLeavetype(ltype.id, ltype.leavetype)}
-                                data-bs-dismiss={closeModal == true ? 'modal' : ''}
+                                data-bs-dismiss={closeModal === true ? 'modal' : ''}
                               >
                               </i>
                             </td>

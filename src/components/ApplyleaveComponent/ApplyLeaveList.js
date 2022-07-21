@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
+// import { Link } from 'react-router-dom'
+// import axios from 'axios'
 import dateFormat from 'dateformat'
 
 const ApplyLeaveList = props => {
@@ -22,7 +22,7 @@ const ApplyLeaveList = props => {
         
         <td><span className='font-bold'>{dateFormat(leave.start_date, "mmm d, yyyy")}</span>  - <span className='font-bold'>{dateFormat(leave.end_date, "mmm d, yyyy")}</span> </td>
         <td>{
-          leave.status == 1 ? 
+          leave.status === 1 ? 
           <span className='badge custom-badge-primary'>Approved</span> 
           // <span className='badge custom-badge-danger'>Cancel</span> 
           : 

@@ -1,34 +1,40 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import '../../css/TableStyle.css'
-import axios from 'axios'
+// import axios from 'axios'
 import axiosConfig from "../../axiosConfig"
 
 import DepartmentList from './DepartmentList'
-import SideBar from '../SideNav/SideBar'
+import MyAlert from "../AlertComponent/AlertTemplate"
 
 const DepartmentIndex = () => {
   const [department, setDepartment] = useState([])
   const [isLoading, setIsloading] = useState(true)
   const previousDepartment = useRef(null)
+  const [alertShow, setAlertShow] = useState(false)
+  const [msgAlert, setMsgAlert] = useState("")
 
   const deleteDepartment = (id) => {
     axiosConfig.delete(`/api/departments/${id}`)
     .then((res) => {
       console.log(res)
-      if(res.status == 200) {
-        let list = []
-        department.map((val, index) => {
-          if(id != val.id) {
-            list.push({
-              id : val.id,
-              deptprefix : val.deptprefix,
-              deptcode : val.deptcode,
-              deptname : val.deptname
-            })
-          }
-        })
-        setDepartment(list)
+      if(res.status === 200) {
+        // let list = []
+        // department.forEach((val, index) => {
+        //   if(id !== val.id) {
+        //     list.push({
+        //       id : val.id,
+        //       deptprefix : val.deptprefix,
+        //       deptcode : val.deptcode,
+        //       deptname : val.deptname
+        //     })
+        //   }
+        // })
+        // setDepartment(list)
+
+        setDepartment(department => department.filter((dept) => dept.id !== id))
+        setAlertShow(true)
+        setMsgAlert(res.data.message)
       }
     })
     .catch((res) => {
@@ -47,14 +53,18 @@ const DepartmentIndex = () => {
       setDepartment(filteredLeave)
     // }
   }
+  
+  const closeAlert = (status) => {
+    setAlertShow(status)
+  }
 
   useEffect(() => {
     axiosConfig.get(`/api/departments`)
     .then(res => {
       console.log(res)
       let list = []
-      if(res.status == 200) {
-        res.data.map(j => {
+      if(res.status === 200) {
+        res.data.forEach(j => {
           list.push({
             id : j.id,
             deptprefix : j.deptprefix,
@@ -77,9 +87,9 @@ const DepartmentIndex = () => {
 
   return (
     <React.Fragment>
-      <SideBar />
       <div className="main">
         <div className="container">
+          <MyAlert showAlert={alertShow} closeAlert={closeAlert} msgAlert={msgAlert} />
           <div className='mb-3'>
             <h5>DEPARTMENT LIST</h5>
           </div>

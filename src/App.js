@@ -1,7 +1,7 @@
 import React from 'react';
-// import Sidebar from './components/SideNav/SideBar'
+import SideBar from './components/SideNav/SideBar'
 
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // EMPLOYEE
 import EmployeeIndex from './components/EmployeeComponent/EmployeeIndex';
@@ -24,7 +24,7 @@ import LoginIndex from './components/LoginComponent/LoginIndex';
 import LogoutIndex from './components/LoginComponent/LogoutIndex';
 
 // REDIRECTS
-import NotFound from './components/RedirectsComponent/NotFound';
+// import NotFound from './components/RedirectsComponent/NotFound';
 
 
 function App() {
@@ -36,7 +36,7 @@ function App() {
           <Route exact path="/"><LoginIndex /></Route>
           <Route exact path="/login"><LoginIndex /></Route>
           {/* LOGIN */}
-
+          <SideBar />
           {/* EMPLOYEE */}
             <Route exact path="/employees"><EmployeeIndex /></Route>
             {/** NEW/EDIT **/}
@@ -66,8 +66,7 @@ function App() {
           {/* LOGOUT */}
           
           
-          {/* <Route exact path="/404"><NotFound /></Route> */}
-          {/* <Route exact path='*'><Redirect to="/404" /></Route> */}
+          {/* <Route exact path="*"><NotFound /></Route> */}
         </React.Fragment>
       </Switch>
     </Router>
