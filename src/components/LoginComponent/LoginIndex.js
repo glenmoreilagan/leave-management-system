@@ -7,10 +7,7 @@ import { useHistory as History } from "react-router-dom"
 
 const LoginIndex = () => {
   const history = History()
-  const [userLogin, setUserlogin] = useState({
-    email : 'ray.gutmann@example.org',
-    password : 'password'
-  })
+  const [userLogin, setUserlogin] = useState({})
 
   const onChangeInput = (e) => {
     const { name, value } = e.target
@@ -39,7 +36,7 @@ const LoginIndex = () => {
     axios.get(`http://localhost:8000/sanctum/csrf-cookie`, {withCredentials : true})
     .then((res) => {
       if (res.data.status) {
-        history.push("/employees")
+        // history.push("/employees")
       }
     })
     .catch((err) => {
@@ -58,7 +55,7 @@ const LoginIndex = () => {
             name="email"
             className="form-control form-control-sm"
             onChange={(e) => onChangeInput(e)}
-            value='ray.gutmann@example.org'
+            value={userLogin.email || ''}
           />
         </div>
         <div className="div-password mb-3">
@@ -68,7 +65,7 @@ const LoginIndex = () => {
             name="password"
             className="form-control form-control-sm"
             onChange={(e) => onChangeInput(e)}
-            value='password'
+            value={userLogin.password || ''}
           />
         </div>
 

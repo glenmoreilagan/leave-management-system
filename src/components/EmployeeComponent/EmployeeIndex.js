@@ -79,6 +79,7 @@ const EmployeeIndex = () => {
               empname: j.empname,
               address: j.address,
               phone: j.phone,
+              email: j.email,
               image: res.data[0].image,
             })
           })

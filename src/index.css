@@ -178,6 +178,7 @@ nav.breadcrumb {
   color: var(--main-font-color);
   font-size: 13px;
   padding: 10px 10px 0 10px;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
 }
 
 nav.breadcrumb li a {
@@ -193,4 +194,9 @@ nav.breadcrumb li a {
 
 label {
   font-size: .875rem;
+}
+
+.card {
+  border: none !important;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
 }

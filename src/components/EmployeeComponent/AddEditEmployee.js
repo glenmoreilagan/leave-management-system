@@ -35,6 +35,8 @@ const AddEditEmployee = () => {
     formData.append("empname", employee.empname)
     formData.append("address", employee.address)
     formData.append("phone", employee.phone)
+    formData.append("email", employee.email)
+    formData.append("password", employee.password)
 
     let config = {
       headers: {
@@ -92,6 +94,7 @@ const AddEditEmployee = () => {
               empname: res.data.empname,
               address: res.data.address,
               phone: res.data.phone,
+              email: res.data.email,
               image: res.data.image,
             })
           }
@@ -130,6 +133,10 @@ const AddEditEmployee = () => {
               <Form.Control onChange={(e) => inputOnChange(e)} type="text" id="address" name="address" value={employee.address || ""} size='sm' as='textarea' />
               <Form.Label htmlFor="phone">Contact No.</Form.Label>
               <Form.Control onChange={(e) => inputOnChange(e)} type="text" id="phone" name="phone" value={employee.phone || ""} size='sm' />
+              <Form.Label htmlFor="email">Email</Form.Label>
+              <Form.Control onChange={(e) => inputOnChange(e)} type="text" id="email" name="email" value={employee.email || ""} size='sm' />
+              <Form.Label htmlFor="password">Password</Form.Label>
+              <Form.Control onChange={(e) => inputOnChange(e)} type="password" id="password" name="password" value={employee.password || ""} size='sm' />
               <Form.Label htmlFor="file">Picture</Form.Label>
               <Form.Control onChange={(e) => selectPic(e)} type="file" id="file" name="file" size='sm' />
               </div>
