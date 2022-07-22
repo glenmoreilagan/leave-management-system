@@ -44,7 +44,11 @@ const AddEditEmployee = () => {
         "content-type": "multipart/form-data",
       },
     }
-
+    // console.log(file)
+    // for (var pair of formData.entries()) {
+    //   console.log(pair[0]+ ', ' + pair[1]); 
+    // }
+    // return
     if (id === "create") {
       axiosConfig
         .post("/api/employees", formData, config)
@@ -143,7 +147,7 @@ const AddEditEmployee = () => {
               <Form.Control onChange={(e) => selectPic(e)} type="file" id="file" name="file" size='sm' />
               </div>
               <div className="col">
-                <img src={employee.image ??`http://localhost:3001/images/${employee.image}`} alt="Employee Profile" />
+                <img src={employee.image ? `http://localhost:8000/${employee.image}` : ''} alt="Employee Profile" />
               </div>
             </div>
           </Card>

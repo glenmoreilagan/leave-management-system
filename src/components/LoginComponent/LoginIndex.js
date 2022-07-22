@@ -35,7 +35,12 @@ const LoginIndex = () => {
           role : res.data.role,
         }))
 
-        history.push("/employees")
+        if(res.data.role === 'c81e728d9d4c2f636f067f89cc14862c') {
+          history.push("/applyleaves")
+        } else if(res.data.role === 'c4ca4238a0b923820dcc509a6f75849b') {
+          history.push("/employees")
+        }
+
       }
     })
     .catch((err) => {
@@ -85,7 +90,7 @@ const LoginIndex = () => {
           />
         </div>
 
-        <a href="#">Forgot password?</a>
+        <a href="#forgot-password">Forgot password?</a>
         <div className="div-login-btn">
           <button className="btn btn-sm btn-login" onClick={btnLogin}>
             LOGIN

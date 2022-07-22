@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import dateFormat from 'dateformat'
 
 const ApplyLeaveList = props => {
-  const { leave, index, deleteLeave } = props
+  const { leave, deleteLeave } = props
   return (
     <React.Fragment>
       <tr>

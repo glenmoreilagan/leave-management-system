@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 // import axios from "axios"
 import axiosConfig from "../../axiosConfig"
-import dateFormat from 'dateformat'
+// import dateFormat from 'dateformat'
 
 import Breadcrumb from '../BreadcrumbComponent/Breadcrumb'
 import LookupLeaveType from "../LookupComponent/LookupLeaveType"

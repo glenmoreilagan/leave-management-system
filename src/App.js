@@ -1,5 +1,5 @@
 import React from 'react';
-import SideBar from './components/SideNav/SideBar'
+// import SideBar from './components/SideNav/SideBar'
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
