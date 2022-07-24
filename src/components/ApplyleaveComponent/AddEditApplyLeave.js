@@ -11,7 +11,9 @@ import SideBar from "../SideNav/SideBar"
 
 const AddEditApplyLeave = () => {
   const { id } = useParams()
-  const [leave, setLeave] = useState({})
+  const [leave, setLeave] = useState({
+    emp_id : JSON.parse(sessionStorage.getItem('user')).e_id
+  })
   const [alertShow, setAlertShow] = useState(false)
   const [msgAlert, setMsgAlert] = useState("")
 
@@ -27,10 +29,6 @@ const AddEditApplyLeave = () => {
   const saveLeave = () => {
     let e_id = JSON.parse(sessionStorage.getItem('user')).e_id
     if (id === "create") {
-      setLeave({
-        ...leave,
-        emp_id : e_id
-      })
       axiosConfig.post("/api/leaves", leave)
       .then((res) => {
         console.log(res)

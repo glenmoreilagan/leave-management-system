@@ -22,9 +22,14 @@ import AddEditApplyLeave from './components/ApplyleaveComponent/AddEditApplyLeav
 // LEAVE
 import LeaveIndex from './components/LeaveComponent/LeaveIndex';
 
+// ADMIN
+import AdminIndex from './components/AdminComponent/AdminIndex';
+import AddEditAdmin from './components/AdminComponent/AddEditAdmin';
+
 // LOGIN/LOGOUT
 import LoginIndex from './components/LoginComponent/LoginIndex';
 import LogoutIndex from './components/LoginComponent/LogoutIndex';
+
 
 // REDIRECTS
 // import NotFound from './components/RedirectsComponent/NotFound';
@@ -69,6 +74,12 @@ function App() {
             {/** NEW/EDIT **/}
             {/* <Route exact path="/leaves/:id"><LeaveIndex /></Route> */}
           {/* LEAVE */}
+
+          {/* ADMIN */}
+            <Route exact path="/admins"><AdminIndex /></Route>
+            {/** NEW/EDIT **/}
+            <Route exact path="/admins/:id"><AddEditAdmin /></Route>
+          {/* ADMIN */}
           
           {/* LOGOUT */}
             <Route exact path="/logout"><LogoutIndex /></Route>

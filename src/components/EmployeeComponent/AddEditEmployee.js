@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/Button';
 import Breadcrumb from "../BreadcrumbComponent/Breadcrumb"
 import MyAlert from "../AlertComponent/AlertTemplate"
 import SideBar from "../SideNav/SideBar"
+import LookupDepartment from "../LookupComponent/LookupDepartment"
 
 const AddEditEmployee = () => {
   const { id } = useParams()
@@ -19,6 +20,8 @@ const AddEditEmployee = () => {
 
   const [file, setFile] = useState()
   const [fileName, setFileName] = useState('')
+
+  const [selectDepartment, setSelectDepartment] = useState()
 
   const inputOnChange = (e) => {
     const { name, value } = e.target
@@ -38,6 +41,7 @@ const AddEditEmployee = () => {
     formData.append("phone", employee.phone)
     formData.append("email", employee.email)
     formData.append("password", employee.password)
+    formData.append("dept_id", employee.dept_id)
 
     let config = {
       headers: {
@@ -96,11 +100,13 @@ const AddEditEmployee = () => {
           console.log(res)
           if (res.status === 200) {
             setEmployee({
-              empname: res.data.empname,
-              address: res.data.address,
-              phone: res.data.phone,
-              email: res.data.email,
-              image: res.data.image,
+              empname: res.data[0].empname,
+              address: res.data[0].address,
+              phone: res.data[0].phone,
+              email: res.data[0].email,
+              dept_id: res.data[0].dept_id,
+              deptname: res.data[0].deptname,
+              image: res.data[0].image,
             })
           }
         })
@@ -111,6 +117,13 @@ const AddEditEmployee = () => {
 
     // return console.log('Clean-Up')
   }, [id])
+
+  const mystyle = {
+    employee_profile : {
+      width: '150px',
+      height: '150px',
+    }
+  };
 
   return (
     <React.Fragment>
@@ -133,26 +146,50 @@ const AddEditEmployee = () => {
             </div>
             <div className="row">
               <div className="col">
-              <Form.Label htmlFor="empname">Employee Name</Form.Label>
-              <Form.Control onChange={(e) => inputOnChange(e)} type="text" id="empname" name="empname" value={employee.empname || ""} size='sm' />
-              <Form.Label htmlFor="address">Address</Form.Label>
-              <Form.Control onChange={(e) => inputOnChange(e)} type="text" id="address" name="address" value={employee.address || ""} size='sm' as='textarea' />
-              <Form.Label htmlFor="phone">Contact No.</Form.Label>
-              <Form.Control onChange={(e) => inputOnChange(e)} type="text" id="phone" name="phone" value={employee.phone || ""} size='sm' />
-              <Form.Label htmlFor="email">Email</Form.Label>
-              <Form.Control onChange={(e) => inputOnChange(e)} type="text" id="email" name="email" value={employee.email || ""} size='sm' />
-              <Form.Label htmlFor="password">Password</Form.Label>
-              <Form.Control onChange={(e) => inputOnChange(e)} type="password" id="password" name="password" value={employee.password || ""} size='sm' />
-              <Form.Label htmlFor="file">Picture</Form.Label>
-              <Form.Control onChange={(e) => selectPic(e)} type="file" id="file" name="file" size='sm' />
+                <Form.Label htmlFor="empname">Employee Name</Form.Label>
+                <Form.Control onChange={(e) => inputOnChange(e)} type="text" id="empname" name="empname" value={employee.empname || ""} size='sm' />
+                <Form.Label htmlFor="address">Address</Form.Label>
+                <Form.Control onChange={(e) => inputOnChange(e)} type="text" id="address" name="address" value={employee.address || ""} size='sm' as='textarea' />
+                <Form.Label htmlFor="phone">Contact No.</Form.Label>
+                <Form.Control onChange={(e) => inputOnChange(e)} type="text" id="phone" name="phone" value={employee.phone || ""} size='sm' />
+                <Form.Label htmlFor="email">Email</Form.Label>
+                <Form.Control onChange={(e) => inputOnChange(e)} type="text" id="email" name="email" value={employee.email || ""} size='sm' />
+                <Form.Label htmlFor="password">Password</Form.Label>
+                <Form.Control onChange={(e) => inputOnChange(e)} type="password" id="password" name="password" value={employee.password || ""} size='sm' />
+                <Form.Label htmlFor="file">Picture</Form.Label>
+                <Form.Control onChange={(e) => selectPic(e)} type="file" id="file" name="file" size='sm' />
+
+                <label htmlFor="deptname">Department</label>
+                <div className="input-group">
+                  <input 
+                    name="deptname"
+                    type="text" 
+                    className="form-control form-control-sm" 
+                    id="deptname"
+                    onChange={(e) => inputOnChange(e)}
+                    value={employee.deptname || ""}
+                    readOnly
+                  />
+                  <button 
+                    className="btn btn-primary btn-sm" 
+                    type="button" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#LookupDepartment"
+                  >
+                    <i className="bi bi-list"></i>
+                  </button>
+                </div>
               </div>
               <div className="col">
-                <img src={employee.image ? `http://localhost:8000/${employee.image}` : ''} alt="Employee Profile" />
+                {
+                  id !== 'create' ? <img style={mystyle.employee_profile} src={employee.image ? `http://localhost:8000/${employee.image}` : ''} alt="Employee Profile" /> : ''
+                }
               </div>
             </div>
           </Card>
         </div>
       </div>
+      <LookupDepartment employee={employee} setEmployee={setEmployee} />
     </React.Fragment>
   )
 }

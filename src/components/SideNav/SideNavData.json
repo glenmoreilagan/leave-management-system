@@ -27,9 +27,9 @@
     "class": "no-dropdown"
   },
   {
-    "title": "Manage Admin",
+    "title": "Admin",
     "icon": "bi bi-three-dots-vertical",
-    "path": "/manageadmins",
+    "path": "/admins",
     "class": "no-dropdown"
   },
   {

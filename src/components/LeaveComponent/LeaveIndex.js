@@ -61,14 +61,16 @@ const LeaveIndex = () => {
         const newState = leave.map(liv => {
           // 👇️ if id equals 2, update country property
           if (liv.id === id) {
-            return {...liv, status: 1};
+            return {...liv, status: 1}
           }
     
           // 👇️ otherwise return object as is
-          return liv;
-        });
+          return liv
+        })
     
-        setLeave(newState);
+        setLeave(newState)
+        setAlertShow(true)
+        setMsgAlert(res.data.message)
       }
     })
     .catch((res) => {

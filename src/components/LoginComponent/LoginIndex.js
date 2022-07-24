@@ -68,7 +68,7 @@ const LoginIndex = () => {
   return (
     <div className="main-div-login">
       <div className="login-div">
-        <h4 className="mb-3">SIGN IN</h4>
+        <h4 className="mb-3 text-center">Log in to your account</h4>
         <div className="div-email mb-3">
           <label>Email</label> <sup className="text-danger">{errorCreds.email}</sup>
           <input

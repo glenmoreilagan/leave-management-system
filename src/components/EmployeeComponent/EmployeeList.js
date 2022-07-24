@@ -12,6 +12,7 @@ const EmployeeList = props => {
         <td>{emp.empname}</td>
         <td>{emp.address}</td>
         <td>{emp.phone}</td>
+        <td>{emp.deptname}</td>
         <td className='text-center'>
           <Link to={`/employees/${emp.id}`}>
             <i className="bi bi-pencil-square btn-action-icon primary" title='Edit'></i>
