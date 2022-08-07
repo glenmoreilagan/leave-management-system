@@ -1,3 +1,8 @@
+![image](https://user-images.githubusercontent.com/38287498/183285189-17222004-7e24-439e-a0a7-813bcc54056c.png)
+
+![image](https://user-images.githubusercontent.com/38287498/183285168-8a28ac08-76c4-40af-8e39-60dfde1a36c6.png)
+
+
 run npm install
 
 run npm axios
