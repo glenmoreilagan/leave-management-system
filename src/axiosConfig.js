@@ -1,8 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    // baseURL: 'http://localhost:3001' nodejs
-    baseURL: 'http://localhost:8000' // laravel
+  baseURL: 'http://localhost:8000' // laravel
 })
 instance.defaults.withCredentials = true
 
