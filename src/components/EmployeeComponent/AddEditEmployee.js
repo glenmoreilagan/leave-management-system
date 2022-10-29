@@ -21,7 +21,7 @@ const AddEditEmployee = () => {
   const [file, setFile] = useState()
   const [fileName, setFileName] = useState('')
 
-  const [selectDepartment, setSelectDepartment] = useState()
+  // const [selectDepartment, setSelectDepartment] = useState()
 
   const inputOnChange = (e) => {
     const { name, value } = e.target

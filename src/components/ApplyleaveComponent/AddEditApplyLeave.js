@@ -27,7 +27,7 @@ const AddEditApplyLeave = () => {
   }
 
   const saveLeave = () => {
-    let e_id = JSON.parse(sessionStorage.getItem('user')).e_id
+    // let e_id = JSON.parse(sessionStorage.getItem('user')).e_id
     if (id === "create") {
       axiosConfig.post("/api/leaves", leave)
       .then((res) => {

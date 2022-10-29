@@ -17,6 +17,7 @@ const LogoutIndex = () => {
           sessionStorage.removeItem('user')
 
           history.push("/")
+          window.location.href = 'http://localhost:3000/'
         }
       })
       .catch((err) => {

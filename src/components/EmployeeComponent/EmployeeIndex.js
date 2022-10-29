@@ -9,11 +9,6 @@ import EmployeeList from "./EmployeeList"
 import MyAlert from "../AlertComponent/AlertTemplate"
 import SideBar from "../SideNav/SideBar"
 
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-
 const EmployeeIndex = () => {
   const [employee, setEmployee] = useState([])
   const [isLoading, setIsloading] = useState(true)

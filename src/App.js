@@ -30,6 +30,8 @@ import AddEditAdmin from './components/AdminComponent/AddEditAdmin';
 import LoginIndex from './components/LoginComponent/LoginIndex';
 import LogoutIndex from './components/LoginComponent/LogoutIndex';
 
+import ProfileIndex from './components/ProfileComponent/ProfileIndex';
+
 
 // REDIRECTS
 // import NotFound from './components/RedirectsComponent/NotFound';
@@ -80,7 +82,11 @@ function App() {
           {/** NEW/EDIT **/}
           <Route exact path="/admins/:id"><AddEditAdmin /></Route>
           {/* ADMIN */}
-
+          
+          {/* PROFILE */}
+            <Route exact path="/profile"><ProfileIndex /></Route>
+          {/* PROFILE */}
+          
           {/* LOGOUT */}
           <Route exact path="/logout"><LogoutIndex /></Route>
           {/* LOGOUT */}
